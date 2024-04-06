@@ -1,5 +1,4 @@
 import Header from "./_components/header";
-import Link from "next/link";
 import Player from "./_components/player";
 import { ReactNode } from "react";
 import Sidenav from "./_components/sidenav";

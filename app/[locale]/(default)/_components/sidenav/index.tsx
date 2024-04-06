@@ -13,13 +13,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Nav } from "@/types/nav";
 import { PiPlaylistDuotone } from "react-icons/pi";
-import { Playlist } from "../../_data/playlists";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
+import { useAppContext } from "@/contexts/app";
 import { useTranslations } from "next-intl";
 
 export default function () {
   const t = useTranslations("nav");
+
+  const { setIsSiderOpen } = useAppContext();
   const router = useRouter();
   const pathname = usePathname();
   const musicNavs: Nav[] = [
@@ -83,12 +83,13 @@ export default function () {
                 <Button
                   key={idx}
                   variant="ghost"
-                  className={`w-full justify-start gap-x-1 ${
+                  className={`md:w-full justify-start gap-x-1 ${
                     nav.active ? "bg-base-300 text-base-content" : ""
                   }`}
                   onClick={() => {
                     if (nav.url) {
                       router.push(nav.url);
+                      setIsSiderOpen(false);
                     }
                   }}
                 >
@@ -113,6 +114,7 @@ export default function () {
                   onClick={() => {
                     if (nav.url) {
                       router.push(nav.url);
+                      setIsSiderOpen(false);
                     }
                   }}
                 >

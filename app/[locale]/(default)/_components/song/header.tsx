@@ -56,7 +56,7 @@ export default function ({ song }: { song: Song }) {
           ) : (
             <Button
               size="sm"
-              className="flex items-center gap-x-1 w-20"
+              className="flex items-center gap-x-1 w-20 truncate"
               onClick={() => playSong(song)}
             >
               <MdOutlinePlayArrow className="text-2xl" />

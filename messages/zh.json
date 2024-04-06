@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "title": "Melodisco - AI音乐社区",
-    "description": "探索AI生成音乐的迷人世界",
-    "detail": "由Melodisco - AI音乐社区提供"
+    "title": "Melodisco - AI 音乐播放器",
+    "description": "探索 AI 音乐的世界",
+    "detail": "由 Melodisco - AI 音乐播放器提供"
   },
   "brand": {
     "name": "Melodisco",
-    "tagline": "探索AI生成音乐的迷人世界"
+    "tagline": "探索 AI 音乐的世界"
   },
   "user": {
     "sign_in": "登录",

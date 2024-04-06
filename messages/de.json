@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Melodisco - AI Musikplayer",
+    "description": "Entdecken Sie die bezaubernde Welt der von KI generierten Musik",
+    "detail": "von Melodisco - AI Musikplayer"
+  },
+  "brand": {
+    "name": "Melodisco",
+    "tagline": "Entdecken Sie die bezaubernde Welt der von KI generierten Musik"
+  },
+  "user": {
+    "sign_in": "Anmelden",
+    "sign_out": "Abmelden",
+    "feedback": "Feedback"
+  },
+  "nav": {
+    "music": "Musik",
+    "library": "Bibliothek",
+    "discover": "Entdecken",
+    "trending": "Trends",
+    "newest": "Neueste",
+    "roaming": "Stöbern",
+    "recommended": "Empfohlen",
+    "playlists": "Playlists",
+    "favorites": "Favoriten",
+    "recently": "Kürzlich"
+  },
+  "song": {
+    "title": "Titel",
+    "tags": "Tags",
+    "duration": "Dauer",
+    "lyrics": "Texte",
+    "play": "Abspielen"
+  }
+}

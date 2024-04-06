@@ -13,6 +13,7 @@ export const locales = [
   "ru",
   "fr",
   "de",
+  "ar",
 ];
 export const localeNames: any = {
   en: "🇺🇸 English",
@@ -22,6 +23,7 @@ export const localeNames: any = {
   ru: "🇷🇺 Русский",
   fr: "🇫🇷 Français",
   de: "🇩🇪 Deutsch",
+  ar: "🇪🇬 اَلْعَرَبِيَّةُ",
 };
 
 export const defaultLocale = "en";

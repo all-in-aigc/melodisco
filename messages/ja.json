@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Melodisco - AIミュージックプレーヤー",
+    "description": "AIが生み出す魅惑の音楽世界を発見",
+    "detail": "Melodisco - AIミュージックプレーヤー提供"
+  },
+  "brand": {
+    "name": "Melodisco",
+    "tagline": "AIが生み出す魅惑の音楽世界を発見"
+  },
+  "user": {
+    "sign_in": "サインイン",
+    "sign_out": "サインアウト",
+    "feedback": "フィードバック"
+  },
+  "nav": {
+    "music": "音楽",
+    "library": "ライブラリ",
+    "discover": "発見",
+    "trending": "トレンド",
+    "newest": "最新",
+    "roaming": "ローミング",
+    "recommended": "おすすめ",
+    "playlists": "プレイリスト",
+    "favorites": "お気に入り",
+    "recently": "最近"
+  },
+  "song": {
+    "title": "タイトル",
+    "tags": "タグ",
+    "duration": "再生時間",
+    "lyrics": "歌詞",
+    "play": "再生"
+  }
+}

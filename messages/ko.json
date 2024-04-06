@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Melodisco - AI 음악 플레이어",
+    "description": "AI가 생성한 매혹적인 음악 세계를 발견하세요",
+    "detail": "Melodisco - AI 음악 플레이어 제공"
+  },
+  "brand": {
+    "name": "Melodisco",
+    "tagline": "AI가 생성한 매혹적인 음악 세계를 발견하세요"
+  },
+  "user": {
+    "sign_in": "로그인",
+    "sign_out": "로그아웃",
+    "feedback": "피드백"
+  },
+  "nav": {
+    "music": "음악",
+    "library": "라이브러리",
+    "discover": "발견하기",
+    "trending": "트렌딩",
+    "newest": "최신",
+    "roaming": "둘러보기",
+    "recommended": "추천",
+    "playlists": "플레이리스트",
+    "favorites": "즐겨찾기",
+    "recently": "최근에"
+  },
+  "song": {
+    "title": "제목",
+    "tags": "태그",
+    "duration": "재생 시간",
+    "lyrics": "가사",
+    "play": "재생"
+  }
+}

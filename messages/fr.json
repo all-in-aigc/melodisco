@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Melodisco - Lecteur de Musique AI",
+    "description": "Découvrez le monde enchanteur de la musique générée par IA",
+    "detail": "par Melodisco - Lecteur de Musique AI"
+  },
+  "brand": {
+    "name": "Melodisco",
+    "tagline": "Découvrez le monde enchanteur de la musique générée par IA"
+  },
+  "user": {
+    "sign_in": "Se connecter",
+    "sign_out": "Se déconnecter",
+    "feedback": "Retour d'information"
+  },
+  "nav": {
+    "music": "Musique",
+    "library": "Bibliothèque",
+    "discover": "Découvrir",
+    "trending": "Tendance",
+    "newest": "Les plus récents",
+    "roaming": "Flâner",
+    "recommended": "Recommandé",
+    "playlists": "Playlists",
+    "favorites": "Favoris",
+    "recently": "Récemment"
+  },
+  "song": {
+    "title": "Titre",
+    "tags": "Tags",
+    "duration": "Durée",
+    "lyrics": "Paroles",
+    "play": "Lire"
+  }
+}
