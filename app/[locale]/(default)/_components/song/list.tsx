@@ -11,8 +11,6 @@ export default function ({ songs }: { songs: Song[] }) {
   const router = useRouter();
   return (
     <div>
-      <h2 className="text-lg font-medium">{t("roaming")}</h2>
-
       {songs.map((song: Song) => {
         return (
           <div

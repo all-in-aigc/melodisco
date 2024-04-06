@@ -3,8 +3,10 @@ import { findByUuid, getRandomSongs } from "@/models/song";
 import Header from "../../_components/song/header";
 import List from "../../_components/song/list";
 import Lyrics from "../../_components/song/lyrics";
+import { getTranslations } from "next-intl/server";
 
 export default async function ({ params }: { params: { uuid: string } }) {
+  const t = await getTranslations("nav");
   const song = await findByUuid(params.uuid);
   const randomSongs = await getRandomSongs(1, 10);
 
@@ -19,6 +21,8 @@ export default async function ({ params }: { params: { uuid: string } }) {
             </div>
             <div className="md:w-96 mx-8 border-l border-base-200 px-8">
               <div className="mt-4">
+                <h2 className="text-lg mb-4 font-medium">{t("roaming")}</h2>
+
                 {randomSongs && <List songs={randomSongs} />}
               </div>
             </div>

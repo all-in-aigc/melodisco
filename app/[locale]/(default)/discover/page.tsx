@@ -1,20 +1,68 @@
-import * as React from "react";
+"use client";
 
 import { MdLocalFireDepartment, MdOutlineRssFeed } from "react-icons/md";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { getLatestSongs, getTrendingSongs } from "@/models/song";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import List from "../_components/song/list";
 import { PiPlaylistDuotone } from "react-icons/pi";
 import { Song } from "@/types/song";
 import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
-export default async function () {
-  const t = await getTranslations("nav");
+export default function () {
+  const t = useTranslations("nav");
+  const [trendingSongs, setTrendingSongs] = useState<Song[] | null>(null);
+  const [latestSongs, setLatestSongs] = useState<Song[] | null>(null);
 
-  const trendingSongs = await getTrendingSongs(1, 50);
-  const latestSongs = await getLatestSongs(1, 50);
+  const fetchTrendingSongs = async function (page: number, limit: number) {
+    try {
+      const uri = `/api/get-trending-songs`;
+      const params = {
+        page,
+        limit,
+      };
+      const resp = await fetch(uri, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params),
+      });
+      const { data } = await resp.json();
+      setTrendingSongs(data || []);
+    } catch (e) {
+      console.log("fetch trending songs failed:");
+    }
+  };
+
+  const fetchLatestSongs = async function (page: number, limit: number) {
+    try {
+      const uri = `/api/get-latest-songs`;
+      const params = {
+        page,
+        limit,
+      };
+      const resp = await fetch(uri, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params),
+      });
+      const { data } = await resp.json();
+      setLatestSongs(data || []);
+    } catch (e) {
+      console.log("fetch trending songs failed:");
+    }
+  };
+
+  useEffect(() => {
+    fetchTrendingSongs(1, 50);
+    fetchLatestSongs(1, 50);
+  }, []);
 
   return (
     <div className="w-full md:max-w-6xl mx-auto">
