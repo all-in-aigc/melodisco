@@ -60,7 +60,7 @@ export default function () {
       title: t("favorites"),
       url: "/favorites",
       icon: <MdOutlineFavorite className="text-lg" />,
-      active: pathname.endsWith("favorite"),
+      active: pathname.endsWith("favorites"),
     },
     {
       title: t("recently"),
@@ -110,7 +110,9 @@ export default function () {
                 <Button
                   key={idx}
                   variant="ghost"
-                  className="w-full justify-start gap-x-1"
+                  className={`md:w-full justify-start gap-x-1 ${
+                    nav.active ? "bg-base-300 text-base-content" : ""
+                  }`}
                   onClick={() => {
                     if (nav.url) {
                       router.push(nav.url);

@@ -11,10 +11,12 @@ import { PiPlaylistDuotone } from "react-icons/pi";
 import Skeleton from "../_components/skeleton";
 import { Song } from "@/types/song";
 import { getTranslations } from "next-intl/server";
+import { useAppContext } from "@/contexts/app";
 import { useTranslations } from "next-intl";
 
 export default function () {
   const t = useTranslations("nav");
+
   const [trendingSongs, setTrendingSongs] = useState<Song[] | null>(null);
   const [trendingLoading, setTrendingLoading] = useState(false);
   const [latestSongs, setLatestSongs] = useState<Song[] | null>(null);

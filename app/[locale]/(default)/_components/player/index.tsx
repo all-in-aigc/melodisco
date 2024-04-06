@@ -190,13 +190,11 @@ export default function () {
 
   useEffect(() => {
     const audio = audioRef.current;
-    console.log("isDragging", audio);
     if (!audio) {
       return;
     }
 
     const updateProgress = () => {
-      console.log("update progress");
       if (!isDragging) {
         const progress = audio.currentTime / audio.duration;
         setCurrentTime(audio.currentTime);
@@ -268,7 +266,6 @@ export default function () {
   }, [currentSongIndex]);
 
   useEffect(() => {
-    console.log("currentSong", currentSong);
     if (currentSong) {
       const lyrics = currentSong.lyrics ? currentSong.lyrics.split("\n") : [];
       setSplitLyrics(lyrics);
@@ -277,8 +274,6 @@ export default function () {
   }, [currentSong]);
 
   useEffect(() => {
-    console.log("play song", song);
-
     if (!song) {
       return;
     }
@@ -313,7 +308,6 @@ export default function () {
 
   useEffect(() => {
     const audio = audioRef.current;
-    console.log("audo change", audio);
 
     if (!audio) {
       return;
