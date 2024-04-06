@@ -38,6 +38,7 @@ import Locales from "../locales";
 import { Nav } from "@/types/nav";
 import { ReactNode } from "react";
 import Sidenav from "../sidenav";
+import Sidepanel from "../sidepanel";
 import Social from "../social";
 import Theme from "../theme";
 import User from "../user";
@@ -53,7 +54,11 @@ export default function () {
     <header className="flex h-16 left-0 right-0 fixed bg-base-100 z-50 items-center gap-4 border-b border-base-300 px-4 lg:h-[80px] lg:px-6">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="shrink-0 md:hidden">
+          <Button
+            variant="outline"
+            size="icon"
+            className="bg-base-200 border-base-300 shrink-0 md:hidden"
+          >
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
@@ -61,20 +66,7 @@ export default function () {
         <SheetContent side="left" className="flex flex-col">
           <Sidenav />
           <div className="mt-auto mb-40">
-            <Card>
-              <CardHeader>
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button size="sm" className="w-full">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
+            <Sidepanel />
           </div>
         </SheetContent>
       </Sheet>
@@ -82,7 +74,7 @@ export default function () {
       <div className="mr-8">
         <Link href="/" className="flex items-center gap-x-2 font-semibold">
           <img src="/logo.png" className="w-16 h-16" />
-          <span className="text-3xl font-bold">Melodisco</span>
+          <span className="hidden md:block text-3xl font-bold">Melodisco</span>
         </Link>
       </div>
       <div className="w-full flex-1">

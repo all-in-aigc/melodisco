@@ -14,7 +14,9 @@ export default function ({ children }: { children: ReactNode }) {
           <div className="flex-1">
             <Sidenav />
           </div>
-          <div className="mt-auto mb-24 p-4"></div>
+          <div className="mt-auto mb-24 p-4">
+            <Sidepanel />
+          </div>
         </div>
       </div>
       <div className="flex flex-col">

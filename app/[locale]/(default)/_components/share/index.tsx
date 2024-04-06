@@ -2,17 +2,18 @@
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdOutlineShare } from "react-icons/md";
+import { Song } from "@/types/song";
 import { toast } from "sonner";
 
-export default function ({ shareUrl }: { shareUrl: string }) {
+export default function ({ song }: { song: Song }) {
+  const shareUrl = `${process.env.NEXT_PUBLIC_WEB_BASE_URL}/song/${song.uuid}`;
+
   return (
     <CopyToClipboard
       text={`${shareUrl}`}
       onCopy={() => toast.success("copied")}
     >
-      <button className="mx-2">
-        <MdOutlineShare className="text-xl" />
-      </button>
+      <MdOutlineShare className="text-xl" />
     </CopyToClipboard>
   );
 }

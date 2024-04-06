@@ -362,7 +362,7 @@ export default function () {
 
           <div className="flex items-center justify-between p-4">
             <div
-              className="flex items-center gap-x-2 cursor-pointer w-48"
+              className="flex items-center gap-x-2 cursor-pointer"
               onClick={() => router.push(`/song/${song.uuid}`)}
             >
               <Image
@@ -372,15 +372,15 @@ export default function () {
                 alt={song.title}
                 className="rounded-md"
               />
-              <div className="text-sm">
+              <div className="text-sm w-[140px] md:w-sm mt-0.5 truncate">
                 <p className="font-medium truncate">{song.title}</p>
-                <p className="max-w-xs mt-0.5 truncate">
+                <p className="">
                   {formatTime(currentTime)} / {formatTime(duration)}
                 </p>
               </div>
             </div>
 
-            <div className="mx-8 flex items-center text-slate-500 gap-x-4">
+            <div className="mx-8 flex items-center text-slate-500 gap-x-1 md:gap-x-4">
               <button onClick={toggleLike} className="mx-2">
                 {isLiked ? (
                   <MdOutlineFavorite className="text-xl text-primary" />
@@ -419,10 +419,10 @@ export default function () {
               </button>
             </div>
 
-            <div className="flex items-center">
-              <Share
-                shareUrl={`${process.env.NEXT_PUBLIC_WEB_BASE_URL}/song/${song.uuid}`}
-              />
+            <div className="hidden md:flex items-center">
+              <button className="mx-2">
+                <Share song={song} />
+              </button>
 
               <button className="mx-2" onClick={() => setVolume(0)}>
                 <AiOutlineSound className="text-xl" />

@@ -12,6 +12,9 @@ export default function ({ songs }: { songs: Song[] }) {
   return (
     <div>
       {songs.map((song: Song) => {
+        if (!song.title || !song.image_url) {
+          return;
+        }
         return (
           <div
             key={song.uuid}
@@ -27,7 +30,7 @@ export default function ({ songs }: { songs: Song[] }) {
             />
             <div>
               <h3 className="font-medium">{song.title}</h3>
-              <p className="truncate">{song.tags}</p>
+              <p className="truncate max-w-xs">{song.tags}</p>
             </div>
           </div>
         );

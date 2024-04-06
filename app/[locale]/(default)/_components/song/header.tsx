@@ -10,6 +10,7 @@ import {
 import { AiOutlineLike } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Share from "../share";
 import { Song } from "@/types/song";
 import moment from "moment";
 import { useAppContext } from "@/contexts/app";
@@ -34,17 +35,17 @@ export default function ({ song }: { song: Song }) {
         alt={song.title}
         width={160}
         height={160}
-        className="rounded-lg"
+        className="hidden md:block rounded-lg"
       />
 
       <div className="flex flex-col gap-y-2 mr-8">
         <h1 className="text-xl font-medium">{song.title}</h1>
         <p className="text-md">{song.tags}</p>
         <p className="text-md">
-          {moment(song.created_at).format("DD / MM / YYYY")}
+          {moment(song.created_at).format("MMMM Do, YYYY")}
         </p>
 
-        <div className="mt-2 flex gap-x-4 text-md text-base-content">
+        <div className="mt-2 flex gap-x-2 md:gap-x-4 text-md text-base-content">
           {currentSong && currentSong.uuid === song.uuid ? (
             <Button
               size="sm"
@@ -80,11 +81,11 @@ export default function ({ song }: { song: Song }) {
             size="sm"
             className="flex items-center gap-x-1 bg-base-300 text-base-content"
           >
-            <MdOutlineShare className="text-xl" />
+            <Share song={song} />
           </Button>
           <Button
             size="sm"
-            className="flex items-center gap-x-1 bg-base-300 text-base-content"
+            className="hidden md:flex items-center gap-x-1 bg-base-300 text-base-content"
           >
             <MdOutlineDownload className="text-2xl" />
           </Button>

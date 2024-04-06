@@ -1,6 +1,5 @@
 "use client";
 
-import { Bell, Package2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -16,7 +15,7 @@ export default function () {
   const router = useRouter();
 
   return (
-    <Card className="bg-base-200 border-base-200 text-base-content">
+    <Card className="hidden bg-base-200 border-base-200 text-base-content">
       <CardHeader className="p-2 pt-0 md:p-4">
         <CardTitle>Create Music</CardTitle>
         <CardDescription>Create AI Music, enjoy your melody.</CardDescription>

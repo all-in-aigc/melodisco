@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 
 import Image from "next/image";
+import Skeleton from "../skeleton";
 import { Song } from "@/types/song";
 import { useAppContext } from "@/contexts/app";
 import { useRouter } from "next/navigation";
@@ -47,7 +48,9 @@ export default function ({
   return (
     <>
       {loading || songs === null ? (
-        <>loading...</>
+        <>
+          <Skeleton />
+        </>
       ) : !songs ? (
         <>empty</>
       ) : (
@@ -55,14 +58,19 @@ export default function ({
           <TableHeader>
             <TableRow className="border-base-300 text-base-content">
               <TableHead>#</TableHead>
-              <TableHead></TableHead>
+              <TableHead className="hidden sm:table-cell"></TableHead>
               <TableHead>{t("title")}</TableHead>
               <TableHead>{t("tags")}</TableHead>
-              <TableHead>{t("duration")}</TableHead>
+              <TableHead className="hidden md:table-cell">
+                {t("duration")}
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {songs.map((song: Song, idx: number) => {
+              if (!song.title || !song.image_url) {
+                return;
+              }
               const isActive = currentSong && currentSong.uuid === song.uuid;
               return (
                 <TableRow
@@ -85,9 +93,9 @@ export default function ({
                       width="64"
                     />
                   </TableCell>
-                  <TableCell className="font-medium">
+                  <TableCell className="font-medium max-w-[120px] truncate">
                     <p
-                      className="hover:underline"
+                      className="hover:underline truncate"
                       onClick={(e) => {
                         return;
                         e.stopPropagation();
@@ -108,7 +116,9 @@ export default function ({
                     </div>
                   </TableCell>
 
-                  <TableCell className="font-medium">{song.tags}</TableCell>
+                  <TableCell className="font-medium max-w-[120px] md:max-w-sm truncate">
+                    {song.tags}
+                  </TableCell>
 
                   <TableCell className="hidden md:table-cell">
                     {formatTime(song.duration)}

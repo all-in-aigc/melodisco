@@ -15,11 +15,11 @@ export default async function ({ params }: { params: { uuid: string } }) {
       {song && (
         <>
           <Header song={song} />
-          <div className="flex items-start gap-x-8 mt-8">
-            <div className="flex-1">
+          <div className="flex flex-wrap items-start gap-x-8 mt-8">
+            <div className="w-full md:flex-1">
               <Lyrics song={song} />
             </div>
-            <div className="md:w-96 mx-8 border-l border-base-200 px-8">
+            <div className="md:w-96 md:mx-8 border-t md:border-t-0 mt-8 md:mt-0 md:border-l border-base-200 md:px-8 truncate">
               <div className="mt-4">
                 <h2 className="text-lg mb-4 font-medium">{t("roaming")}</h2>
 

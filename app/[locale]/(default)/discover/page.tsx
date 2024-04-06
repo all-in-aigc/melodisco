@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import List from "../_components/song/list";
 import { PiPlaylistDuotone } from "react-icons/pi";
+import Skeleton from "../_components/skeleton";
 import { Song } from "@/types/song";
 import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
@@ -15,7 +16,9 @@ import { useTranslations } from "next-intl";
 export default function () {
   const t = useTranslations("nav");
   const [trendingSongs, setTrendingSongs] = useState<Song[] | null>(null);
+  const [trendingLoading, setTrendingLoading] = useState(false);
   const [latestSongs, setLatestSongs] = useState<Song[] | null>(null);
+  const [latestLoading, setLatestLoading] = useState(false);
 
   const fetchTrendingSongs = async function (page: number, limit: number) {
     try {
@@ -24,6 +27,8 @@ export default function () {
         page,
         limit,
       };
+
+      setTrendingLoading(true);
       const resp = await fetch(uri, {
         method: "POST",
         headers: {
@@ -31,9 +36,12 @@ export default function () {
         },
         body: JSON.stringify(params),
       });
+      setTrendingLoading(false);
+
       const { data } = await resp.json();
       setTrendingSongs(data || []);
     } catch (e) {
+      setTrendingLoading(false);
       console.log("fetch trending songs failed:");
     }
   };
@@ -45,6 +53,8 @@ export default function () {
         page,
         limit,
       };
+
+      setTrendingLoading(true);
       const resp = await fetch(uri, {
         method: "POST",
         headers: {
@@ -52,9 +62,12 @@ export default function () {
         },
         body: JSON.stringify(params),
       });
+      setTrendingLoading(false);
+
       const { data } = await resp.json();
       setLatestSongs(data || []);
     } catch (e) {
+      setTrendingLoading(false);
       console.log("fetch trending songs failed:");
     }
   };
@@ -104,28 +117,40 @@ export default function () {
         )}
       </div> */}
 
-      <div className="mt-8 flex items-start flex-wrap">
-        <div className="w-full md:w-1/2 pr-8">
-          <h2 className="text-2xl font-semibold tracking-tight flex items-center gap-x-1">
+      <div className="md:mt-8 flex items-start flex-wrap">
+        <div className="w-full md:w-1/2 md:pr-8">
+          <h2 className="text-2xl mb-4 font-semibold tracking-tight flex items-center gap-x-1">
             <MdLocalFireDepartment />
             {t("trending")}
           </h2>
-          <ScrollArea className="h-[70vh] mt-4">
-            <div className="p-4">
-              {trendingSongs && <List songs={trendingSongs} />}
-            </div>
-          </ScrollArea>
+          {trendingLoading || trendingSongs === null ? (
+            <>
+              <Skeleton />
+            </>
+          ) : (
+            <ScrollArea className="h-[70vh]">
+              <div className="p-4 max-w-sm truncate">
+                {trendingSongs && <List songs={trendingSongs} />}
+              </div>
+            </ScrollArea>
+          )}
         </div>
-        <div className="w-full md:w-1/2 px-8">
-          <h2 className="text-2xl font-semibold tracking-tight flex items-center gap-x-1">
+        <div className="w-full md:w-1/2 md:px-8 mt-8 md:mt-0">
+          <h2 className="text-2xl mb-4 font-semibold tracking-tight flex items-center gap-x-1">
             <MdOutlineRssFeed />
             {t("newest")}
           </h2>
-          <ScrollArea className="h-[70vh] mt-4">
-            <div className="p-4">
-              {latestSongs && <List songs={latestSongs} />}
-            </div>
-          </ScrollArea>
+          {latestLoading || latestSongs === null ? (
+            <>
+              <Skeleton />
+            </>
+          ) : (
+            <ScrollArea className="h-[70vh]">
+              <div className="p-4 max-sm truncate">
+                {latestSongs && <List songs={latestSongs} />}
+              </div>
+            </ScrollArea>
+          )}
         </div>
       </div>
     </div>
