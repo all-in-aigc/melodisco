@@ -1,0 +1,61 @@
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  margin-top: -5px;
+
+  cursor: pointer;
+  @apply bg-primary;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  border-radius: 2px;
+  @apply bg-base-300;
+}
+
+/* Webkit浏览器的样式 */
+input[type="range"].volume-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)) 0% var(--filled-percentage),
+    #e5e7eb var(--filled-percentage)
+  );
+  @apply bg-primary;
+}
+
+/* Firefox浏览器的样式 */
+input[type="range"].volume-slider::-moz-range-track {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)) 0% var(--filled-percentage),
+    #e5e7eb var(--filled-percentage)
+  );
+}
+
+input[type="range"].volume-slider::-moz-range-progress {
+  @apply bg-primary;
+}
+
+input[type="range"].volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  @apply bg-primary;
+}
+
+input[type="range"].volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  @apply bg-primary;
+}

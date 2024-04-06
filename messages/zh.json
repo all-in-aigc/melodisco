@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Melodisco - AI音乐社区",
+    "description": "探索AI生成音乐的迷人世界",
+    "detail": "由Melodisco - AI音乐社区提供"
+  },
+  "brand": {
+    "name": "Melodisco",
+    "tagline": "探索AI生成音乐的迷人世界"
+  },
+  "user": {
+    "sign_in": "登录",
+    "sign_out": "登出",
+    "feedback": "反馈"
+  },
+  "nav": {
+    "music": "音乐",
+    "library": "私人",
+    "discover": "发现音乐",
+    "trending": "热门音乐",
+    "newest": "最新音乐",
+    "roaming": "随便听听",
+    "recommended": "推荐音乐",
+    "playlists": "推荐歌单",
+    "favorites": "收藏音乐",
+    "recently": "最近播放"
+  },
+  "song": {
+    "title": "歌名",
+    "tags": "标签",
+    "duration": "时长",
+    "lyrics": "歌词",
+    "play": "播放"
+  }
+}

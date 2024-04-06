@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Melodisco - AI Music Community",
+    "description": "Discover the enchanting world of AI-generated music",
+    "detail": "by Melodisco - AI Music Community"
+  },
+  "brand": {
+    "name": "Melodisco",
+    "tagline": "Discover the enchanting world of AI-generated music"
+  },
+  "user": {
+    "sign_in": "Sign in",
+    "sign_out": "Sign out",
+    "feedback": "Feedback"
+  },
+  "nav": {
+    "music": "Music",
+    "library": "Library",
+    "discover": "Discover",
+    "trending": "Trending",
+    "newest": "Newest",
+    "roaming": "Roaming",
+    "recommended": "Recommended",
+    "playlists": "Playlists",
+    "favorites": "Favorites",
+    "recently": "Recently"
+  },
+  "song": {
+    "title": "Title",
+    "tags": "Tags",
+    "duration": "Duration",
+    "lyrics": "Lyrics",
+    "play": "Play"
+  }
+}

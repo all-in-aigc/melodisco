@@ -1,0 +1,30 @@
+@baseUri=http://127.0.0.1:8023/api
+
+### update songs
+POST {{baseUri}}/process/update-songs
+Content-Type: application/json
+
+{
+   
+}
+
+### get random songs
+POST {{baseUri}}/get-random-songs
+Content-Type: application/json
+
+{
+   "page": 1,
+   "limit": 3
+}
+
+
+### gen music
+POST {{baseUri}}/gen-song
+Content-Type: application/json
+
+{
+    "description": "a hip-pop song about a beautiful lady.",
+    "style": "hip-pop",
+    "lyric": "",
+    "title": "" 
+}
