@@ -5,6 +5,30 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  async redirects() {
+    return [
+      {
+        source: "/en-US/:path*",
+        destination: "/en/:path*",
+        permanent: true,
+      },
+      {
+        source: "/zh-CN/:path*",
+        destination: "/zh/:path*",
+        permanent: true,
+      },
+      {
+        source: "/zh-HK/:path*",
+        destination: "/zh/:path*",
+        permanent: true,
+      },
+      {
+        source: "/zh-TW/:path*",
+        destination: "/zh/:path*",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

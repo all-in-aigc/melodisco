@@ -11,7 +11,7 @@ export default async function ({ params }: { params: { uuid: string } }) {
   const randomSongs = await getRandomSongs(1, 10);
 
   return (
-    <div className="pb-24 w-full">
+    <div className="pb-24">
       {song && (
         <>
           <Header song={song} />

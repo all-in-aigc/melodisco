@@ -29,7 +29,7 @@ export default function ({ song }: { song: Song }) {
   };
 
   return (
-    <div className="flex items-center gap-x-8">
+    <div className="flex items-center gap-x-8 border-b border-base-300 pb-8">
       <Image
         src={song.image_url}
         alt={song.title}

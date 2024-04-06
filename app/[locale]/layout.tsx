@@ -46,7 +46,7 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="ko" href="https://melodis.co/ko/" />
         <link rel="alternate" hrefLang="ru" href="https://melodis.co/ru/" />
         <link rel="alternate" hrefLang="fr" href="https://melodis.co/fr/" />
-        <link rel="alternate" hrefLang="zh-CN" href="https://melodis.co/zh/" />
+        <link rel="alternate" hrefLang="zh" href="https://melodis.co/zh/" />
         <link rel="alternate" hrefLang="x-default" href="https://melodis.co" />
 
         <script
