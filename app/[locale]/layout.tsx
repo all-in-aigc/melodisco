@@ -6,6 +6,7 @@ import { AppContextProvider } from "@/contexts/app";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { NextAuthSessionProvider } from "@/providers/session";
+import Player from "./(default)/_components/player";
 import { ThemeProvider } from "@/providers/theme";
 import { Toaster } from "sonner";
 import { getTranslations } from "next-intl/server";

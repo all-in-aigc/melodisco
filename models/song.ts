@@ -94,7 +94,7 @@ export async function getLatestSongs(
 
   const db = getDb();
   const res = await db.query(
-    `SELECT * FROM songs order by created_at desc limit $1 offset $2`,
+    `SELECT * FROM songs WHERE status = 'complete' order by created_at desc limit $1 offset $2`,
     [limit, offset]
   );
   if (res.rowCount === 0) {
@@ -118,7 +118,7 @@ export async function getRandomSongs(
 
   const db = getDb();
   const res = await db.query(
-    `SELECT * FROM songs order by random() limit $1 offset $2`,
+    `SELECT * FROM songs WHERE status = 'complete' order by random() limit $1 offset $2`,
     [limit, offset]
   );
   if (res.rowCount === 0) {
@@ -142,7 +142,7 @@ export async function getTrendingSongs(
 
   const db = getDb();
   const res = await db.query(
-    `SELECT * FROM songs WHERE is_trending = true order by upvote_count desc, play_count desc limit $1 offset $2`,
+    `SELECT * FROM songs WHERE status = 'complete' AND is_trending = true order by upvote_count desc, play_count desc limit $1 offset $2`,
     [limit, offset]
   );
   if (res.rowCount === 0) {
@@ -167,7 +167,7 @@ export async function getUserSongs(
 
   const db = getDb();
   const res = await db.query(
-    `SELECT * FROM songs order WHERE user_uuid = $1 order by created_at desc limit $2 offset $3`,
+    `SELECT * FROM songs order WHERE user_uuid = $1 AND status = 'complete' order by created_at desc limit $2 offset $3`,
     [user_uuid as any, limit, offset]
   );
 
