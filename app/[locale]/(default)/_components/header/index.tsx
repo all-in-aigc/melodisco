@@ -62,7 +62,11 @@ export default function () {
       </div>
 
       <Theme />
-      <Locales />
+
+      <div className="hidden md:block">
+        <Locales />
+      </div>
+
       <User />
     </header>
   );

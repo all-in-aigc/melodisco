@@ -51,7 +51,7 @@ export default function () {
       title: t("playlists"),
       url: "/playlists",
       icon: <PiPlaylistDuotone className="text-lg" />,
-      active: pathname.endsWith("playlist"),
+      active: pathname.endsWith("playlists"),
     },
   ];
 
@@ -77,14 +77,14 @@ export default function () {
           <h2 className="mb-2 px-4 text-sm font-semibold tracking-tight">
             {t("music")}
           </h2>
-          <div className="space-y-1 w-[180px]">
+          <div className="space-y-1">
             {musicNavs.map((nav: Nav, idx: number) => {
               return (
                 <Button
                   key={idx}
                   variant="ghost"
-                  className={`md:w-full justify-start gap-x-1 ${
-                    nav.active ? "bg-base-300 text-base-content" : ""
+                  className={`md:w-full hover:bg-base-100 justify-start gap-x-1 ${
+                    nav.active ? "text-primary hover:text-primary" : ""
                   }`}
                   onClick={() => {
                     if (nav.url) {
@@ -110,8 +110,8 @@ export default function () {
                 <Button
                   key={idx}
                   variant="ghost"
-                  className={`md:w-full justify-start gap-x-1 ${
-                    nav.active ? "bg-base-300 text-base-content" : ""
+                  className={`md:w-full hover:bg-base-100 justify-start gap-x-1 ${
+                    nav.active ? "text-primary hover:text-primary" : ""
                   }`}
                   onClick={() => {
                     if (nav.url) {
