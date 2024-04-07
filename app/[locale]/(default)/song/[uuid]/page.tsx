@@ -1,13 +1,25 @@
-import { findByUuid, getRandomSongs } from "@/models/song";
+import { findByUuid, getRandomSongs, insertRow } from "@/models/song";
 
 import Header from "../../_components/song/header";
 import List from "../../_components/song/list";
 import Lyrics from "../../_components/song/lyrics";
+import { formatSong } from "@/services/song";
+import { getSongInfo } from "@/services/suno";
 import { getTranslations } from "next-intl/server";
 
 export default async function ({ params }: { params: { uuid: string } }) {
   const t = await getTranslations("nav");
-  const song = await findByUuid(params.uuid);
+  let song = await findByUuid(params.uuid);
+  if (!song) {
+    const data = await getSongInfo([params.uuid]);
+    if (data && data.length > 0) {
+      song = formatSong(data[0], false);
+      if (song) {
+        await insertRow(song);
+      }
+    }
+  }
+
   const randomSongs = await getRandomSongs(1, 10);
 
   return (

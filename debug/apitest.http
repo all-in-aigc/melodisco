@@ -1,4 +1,4 @@
-@baseUri=http://127.0.0.1:8023/api
+@baseUri=http://localhost:8023/api
 
 ### update songs
 POST {{baseUri}}/process/update-songs
@@ -6,6 +6,30 @@ Content-Type: application/json
 
 {
    
+}
+
+### fetch song
+POST {{baseUri}}/process/fetch-song
+Content-Type: application/json
+
+{
+   "uuid": "f81be5c0-3de9-4940-95e1-cfb780d3aa5e"
+}
+
+### fetch trending songs
+POST {{baseUri}}/process/fetch-trending-songs
+Content-Type: application/json
+
+{
+   "page": 1
+}
+
+### fetch latest songs
+POST {{baseUri}}/process/fetch-latest-songs
+Content-Type: application/json
+
+{
+   "page": 1
 }
 
 ### get random songs

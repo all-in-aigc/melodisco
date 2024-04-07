@@ -1,4 +1,5 @@
 import { getLatestSongs, getTrendingSongs } from "./suno";
+import { getUuids, insertRow } from "@/models/song";
 
 import { Song } from "@/types/song";
 import fs from "fs";
@@ -62,6 +63,53 @@ export async function getSunoLatestSongs(page: number): Promise<Song[]> {
     console.log("get trending songs failed:", e);
     return [];
   }
+}
+
+export async function updateSongs(allSongs: Song[]) {
+  const uuids = await getUuids();
+  const allSongsCount = allSongs.length;
+
+  console.log(
+    `update songs count: ${allSongsCount}, exist songs count: ${uuids.length}`
+  );
+
+  let existCount = 0;
+  let newCount = 0;
+  let failedCount = 0;
+  for (let i = 0; i < allSongsCount; i++) {
+    const song = allSongs[i];
+    if (!song.uuid) {
+      continue;
+    }
+
+    if (uuids && uuids.includes(song.uuid)) {
+      console.log("song exist: ", song.uuid, song.audio_url);
+      existCount += 1;
+      continue;
+    }
+
+    try {
+      await insertRow(song);
+      newCount += 1;
+      console.log(
+        "insert new songs: ",
+        song.uuid,
+        song.audio_url,
+        i,
+        allSongsCount - i
+      );
+    } catch (e) {
+      failedCount += 1;
+      console.log("insert song failed: ", song.uuid, song.audio_url, i, e);
+    }
+  }
+
+  return {
+    all_count: allSongsCount,
+    exist_count: existCount,
+    new_count: newCount,
+    failed_count: failedCount,
+  };
 }
 
 export function formatSong(v: any, is_trending: boolean): Song {
