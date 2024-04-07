@@ -67,65 +67,64 @@ export default function ({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {songs.map((song: Song, idx: number) => {
-              if (!song.title || !song.image_url) {
-                return;
-              }
-              const isActive = currentSong && currentSong.uuid === song.uuid;
-              return (
-                <TableRow
-                  key={idx}
-                  className={`cursor-pointer border-base-200 hover:bg-base-200 ${
-                    isActive ? "bg-base-300 rounded-xl" : ""
-                  }`}
-                  onClick={() => updatePlaylist(song, idx)}
-                >
-                  <TableCell className="font-medium">
-                    {isActive ? <img src="/playing.gif" /> : idx + 1}
-                  </TableCell>
+            {songs
+              .filter((item: Song) => item.title && item.image_url)
+              .map((song: Song, idx: number) => {
+                const isActive = currentSong && currentSong.uuid === song.uuid;
+                return (
+                  <TableRow
+                    key={idx}
+                    className={`cursor-pointer border-base-200 hover:bg-base-200 ${
+                      isActive ? "bg-base-300 rounded-xl" : ""
+                    }`}
+                    onClick={() => updatePlaylist(song, idx)}
+                  >
+                    <TableCell className="font-medium">
+                      {isActive ? <img src="/playing.gif" /> : idx + 1}
+                    </TableCell>
 
-                  <TableCell className="hidden sm:table-cell">
-                    <Image
-                      alt={song.title}
-                      className="aspect-square rounded-md object-cover"
-                      height="64"
-                      src={song.image_url}
-                      width="64"
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium max-w-[120px] truncate">
-                    <p
-                      className="hover:underline truncate"
-                      onClick={(e) => {
-                        return;
-                        e.stopPropagation();
-                        router.push(`/song/${song.uuid}`);
-                      }}
-                    >
-                      {song.title}
-                    </p>
-                    <div className="flex items-center gap-x-4 mt-1">
-                      <div className="flex items-center gap-x-0.5">
-                        <MdHeadset />
-                        {song.play_count}
+                    <TableCell className="hidden sm:table-cell">
+                      <Image
+                        alt={song.title}
+                        className="aspect-square rounded-md object-cover"
+                        height="64"
+                        src={song.image_url}
+                        width="64"
+                      />
+                    </TableCell>
+                    <TableCell className="font-medium max-w-[120px] truncate">
+                      <p
+                        className="hover:underline truncate"
+                        onClick={(e) => {
+                          return;
+                          e.stopPropagation();
+                          router.push(`/song/${song.uuid}`);
+                        }}
+                      >
+                        {song.title}
+                      </p>
+                      <div className="flex items-center gap-x-4 mt-1">
+                        <div className="flex items-center gap-x-0.5">
+                          <MdHeadset />
+                          {song.play_count}
+                        </div>
+                        <div className="flex items-center gap-x-0.5">
+                          <MdOutlineThumbUp />
+                          {song.upvote_count}
+                        </div>
                       </div>
-                      <div className="flex items-center gap-x-0.5">
-                        <MdOutlineThumbUp />
-                        {song.upvote_count}
-                      </div>
-                    </div>
-                  </TableCell>
+                    </TableCell>
 
-                  <TableCell className="font-medium max-w-[120px] md:max-w-sm truncate">
-                    {song.tags}
-                  </TableCell>
+                    <TableCell className="font-medium max-w-[120px] md:max-w-sm truncate">
+                      {song.tags}
+                    </TableCell>
 
-                  <TableCell className="hidden md:table-cell">
-                    {formatTime(song.duration)}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                    <TableCell className="hidden md:table-cell">
+                      {formatTime(song.duration)}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       )}

@@ -40,7 +40,8 @@ CREATE TABLE favorite_songs (
     user_uuid VARCHAR(255) NOT NULL,
     created_at timestamptz,
     updated_at timestamptz,
-    status VARCHAR(50)
+    status VARCHAR(50),
+    CONSTRAINT unique_favorite_song UNIQUE (song_uuid, user_uuid) 
 );
 
 CREATE TABLE play_songs (

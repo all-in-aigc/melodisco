@@ -74,12 +74,65 @@ export default function () {
     setIsPlaying(!isPlaying);
   };
 
+  const fetchFavoriteSong = async function (song_uuid: string) {
+    try {
+      const params = {
+        song_uuid: song_uuid,
+      };
+      const resp = await fetch("/api/get-favorite-song", {
+        method: "POST",
+        headers: {
+          "Content-Type": "applicaion/json",
+        },
+        body: JSON.stringify(params),
+      });
+      const { data } = await resp.json();
+
+      if (data && data.status === "on") {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
+    } catch (e) {
+      console.log("fetch favorite song failed:", e);
+    }
+  };
+
+  const updateFavoriteSong = async function (song_uuid: string) {
+    try {
+      const params = {
+        song_uuid: song_uuid,
+        status: isLiked ? "off" : "on",
+      };
+      const resp = await fetch("/api/update-favorite-song", {
+        method: "POST",
+        headers: {
+          "Content-Type": "applicaion/json",
+        },
+        body: JSON.stringify(params),
+      });
+      const { data } = await resp.json();
+
+      if (data && data.status === "on") {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
+    } catch (e) {
+      console.log("update favorite song failed:", e);
+    }
+  };
+
   const toggleLike = () => {
+    if (!song || !song.uuid) {
+      return;
+    }
     if (!user || !user.uuid) {
       setIsShowSignPanel(true);
       return;
     }
-    setIsLiked(!isLiked);
+
+    updateFavoriteSong(song.uuid);
   };
 
   const togglePlayMode = () => {
@@ -276,6 +329,7 @@ export default function () {
       const lyrics = currentSong.lyrics ? currentSong.lyrics.split("\n") : [];
       setSplitLyrics(lyrics);
       setSong(currentSong);
+      fetchFavoriteSong(currentSong.uuid);
     }
   }, [currentSong]);
 
@@ -372,7 +426,7 @@ export default function () {
                 alt={song.title}
                 className="rounded-md"
               />
-              <div className="text-sm w-[120px] md:w-96 mt-0.5 truncate">
+              <div className="text-sm w-[120px] md:w-[1/3] mt-0.5 truncate">
                 <p className="font-medium truncate">{song.title}</p>
                 <p className="">
                   {formatTime(currentTime)} / {formatTime(duration)}

@@ -197,6 +197,37 @@ export function getSongsFromSqlResult(
   return songs;
 }
 
+export async function getUserFavoriteSongs(
+  user_uuid: string,
+  page: number,
+  limit: number
+): Promise<Song[] | undefined> {
+  if (page < 1) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
+  const db = getDb();
+  const res = await db.query(
+    `SELECT s.*, fs.updated_at FROM songs AS s 
+      LEFT JOIN favorite_songs AS fs 
+      ON s.uuid = fs.song_uuid 
+      WHERE fs.user_uuid = $1 AND fs.status = 'on' 
+      ORDER BY fs.updated_at DESC 
+      LIMIT $2 OFFSET $3`,
+    [user_uuid as any, limit, offset]
+  );
+
+  if (res.rowCount === 0) {
+    return undefined;
+  }
+
+  return getSongsFromSqlResult(res);
+}
+
 export function formatSong(row: QueryResultRow): Song | undefined {
   let song: Song = {
     uuid: row.uuid,

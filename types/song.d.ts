@@ -19,3 +19,11 @@ export interface Song {
   is_trending: boolean;
   type: string;
 }
+
+export interface FavoriteSong {
+  song_uuid: string;
+  user_uuid: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+}
