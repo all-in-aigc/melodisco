@@ -3,15 +3,11 @@ import "../globals.css";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 import { AppContextProvider } from "@/contexts/app";
-import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { NextAuthSessionProvider } from "@/providers/session";
-import Player from "./(default)/_components/player";
 import { ThemeProvider } from "@/providers/theme";
 import { Toaster } from "sonner";
 import { getTranslations } from "next-intl/server";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata({
   params: { locale },
@@ -76,18 +72,17 @@ export default function RootLayout({
           }}
         ></script>
       </head>
-      <body className={inter.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <NextAuthSessionProvider>
-            <AppContextProvider>
-              <ThemeProvider>
-                <Toaster position="top-center" richColors />
-                {children}
-              </ThemeProvider>
-            </AppContextProvider>
-          </NextAuthSessionProvider>
-        </NextIntlClientProvider>
-      </body>
+
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextAuthSessionProvider>
+          <AppContextProvider>
+            <ThemeProvider>
+              <Toaster position="top-center" richColors />
+              {children}
+            </ThemeProvider>
+          </AppContextProvider>
+        </NextAuthSessionProvider>
+      </NextIntlClientProvider>
     </html>
   );
 }

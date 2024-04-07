@@ -40,7 +40,7 @@ export default function () {
             </Avatar>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent className="mx-4 bg-base-100 text-base-content border-base-200">
+          <DropdownMenuContent className="mx-4 bg-base-100 text-base-content border-base-300">
             <DropdownMenuLabel className="text-center truncate">
               {user.nickname ? user.nickname : user.email}
             </DropdownMenuLabel>

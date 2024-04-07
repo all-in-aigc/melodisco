@@ -24,8 +24,8 @@ export default function () {
 
   return (
     <Dialog open={isShowSignPanel} onOpenChange={setIsShowSignPanel}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
+      <DialogContent className="w-[80%] mx-auto bg-base-200 border-base-300 rounded-md">
+        <DialogHeader className="border-b border-base-300 pb-2">
           <DialogTitle>{t("sign_in")}</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>

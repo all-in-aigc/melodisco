@@ -29,8 +29,8 @@ export default function ({ songs }: { songs: Song[] }) {
               className="rounded-md"
             />
             <div>
-              <h3 className="font-medium">{song.title}</h3>
-              <p className="truncate max-w-xs">{song.tags}</p>
+              <h3 className="truncate w-60 font-medium">{song.title}</h3>
+              <p className="truncate w-60">{song.tags}</p>
             </div>
           </div>
         );
