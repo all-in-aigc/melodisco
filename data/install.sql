@@ -34,3 +34,29 @@ CREATE TABLE songs (
     is_public BOOLEAN,
     is_trending BOOLEAN
 );
+
+CREATE TABLE favorite_songs (
+    song_uuid VARCHAR(255) NOT NULL,
+    user_uuid VARCHAR(255) NOT NULL,
+    created_at timestamptz,
+    updated_at timestamptz,
+    status VARCHAR(50)
+);
+
+CREATE TABLE play_songs (
+    song_uuid VARCHAR(255) NOT NULL,
+    user_uuid VARCHAR(255) NOT NULL,
+    created_at timestamptz,
+    updated_at timestamptz,
+    is_signin BOOLEAN,
+    status VARCHAR(50)
+);
+
+CREATE TABLE upvote_songs (
+    song_uuid VARCHAR(255) NOT NULL,
+    user_uuid VARCHAR(255) NOT NULL,
+    created_at timestamptz,
+    updated_at timestamptz,
+    is_signin BOOLEAN,
+    status VARCHAR(50)
+)

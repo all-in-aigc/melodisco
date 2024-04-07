@@ -27,12 +27,14 @@ import { useRouter } from "next/navigation";
 
 export default function () {
   const router = useRouter();
+  const { user } = useAppContext();
   const {
     playlist,
     currentSong,
     setCurrentSong,
     currentSongIndex,
     setCurrentSongIndex,
+    setIsShowSignPanel,
   } = useAppContext();
 
   const [song, setSong] = useState<Song | null>(null);
@@ -73,6 +75,10 @@ export default function () {
   };
 
   const toggleLike = () => {
+    if (!user || !user.uuid) {
+      setIsShowSignPanel(true);
+      return;
+    }
     setIsLiked(!isLiked);
   };
 
@@ -366,7 +372,7 @@ export default function () {
                 alt={song.title}
                 className="rounded-md"
               />
-              <div className="text-sm w-[140px] md:w-sm mt-0.5 truncate">
+              <div className="text-sm w-[120px] md:w-96 mt-0.5 truncate">
                 <p className="font-medium truncate">{song.title}</p>
                 <p className="">
                   {formatTime(currentTime)} / {formatTime(duration)}
@@ -374,8 +380,8 @@ export default function () {
               </div>
             </div>
 
-            <div className="mx-8 flex items-center text-slate-500 gap-x-1 md:gap-x-4">
-              <button onClick={toggleLike} className="mx-2">
+            <div className="mx-2 md:mx-8 flex items-center text-slate-500 gap-x-1 md:gap-x-4">
+              <button onClick={toggleLike} className="">
                 {isLiked ? (
                   <MdOutlineFavorite className="text-xl text-primary" />
                 ) : (
@@ -383,13 +389,13 @@ export default function () {
                 )}
               </button>
 
-              <button onClick={playPrev} className="mx-1">
+              <button onClick={playPrev} className="">
                 <MdOutlineSkipPrevious className="text-3xl text-primary" />
               </button>
 
               <button
                 onClick={togglePlay}
-                className="mx-1 p-1 bg-primary rounded-full text-neutral"
+                className="p-1 bg-primary rounded-full text-neutral"
               >
                 {isPlaying ? (
                   <MdOutlinePause className="text-3xl" />
@@ -398,11 +404,11 @@ export default function () {
                 )}
               </button>
 
-              <button onClick={playNext} className="mx-1">
+              <button onClick={playNext} className="">
                 <MdOutlineSkipNext className="text-3xl text-primary" />
               </button>
 
-              <button onClick={togglePlayMode} className="mx-2">
+              <button onClick={togglePlayMode} className="">
                 {playMode === "sequence" ? (
                   <MdFormatListNumbered className="text-xl" />
                 ) : playMode === "shuffle" ? (

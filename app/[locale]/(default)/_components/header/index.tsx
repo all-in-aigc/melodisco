@@ -13,11 +13,11 @@ import User from "../user";
 import { useAppContext } from "@/contexts/app";
 
 export default function () {
-  const { isSiderOpen, setIsSiderOpen } = useAppContext();
+  const { theme, isSiderOpen, setIsSiderOpen } = useAppContext();
 
   return (
     <header className="flex h-16 left-0 right-0 fixed bg-base-100 z-50 items-center gap-4 border-b border-base-300 px-4 lg:h-[80px] lg:px-6">
-      <Sheet open={isSiderOpen}>
+      <Sheet open={isSiderOpen} onOpenChange={setIsSiderOpen}>
         <SheetTrigger asChild>
           <Button
             variant="outline"
@@ -28,7 +28,11 @@ export default function () {
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col">
+        <SheetContent
+          side="left"
+          className="flex flex-col py-8 px-4 bg-base-200 border-base-300"
+          data-theme={theme}
+        >
           <Sidenav />
           <div className="mt-auto mb-40">
             <Sidepanel />

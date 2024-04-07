@@ -18,6 +18,7 @@ export const AppContextProvider = ({ children }: ContextProviderProps) => {
   const [theme, setTheme] = useState("light");
   const [locale, setLocale] = useState("");
   const [isSiderOpen, setIsSiderOpen] = useState(false);
+  const [isShowSignPanel, setIsShowSignPanel] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [playlist, setPlaylist] = useState<Song[]>([]);
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
@@ -57,6 +58,8 @@ export const AppContextProvider = ({ children }: ContextProviderProps) => {
         setLocale,
         isSiderOpen,
         setIsSiderOpen,
+        isShowSignPanel,
+        setIsShowSignPanel,
         user,
         setUser,
         playlist,

@@ -3,6 +3,7 @@ import Player from "./_components/player";
 import { ReactNode } from "react";
 import Sidenav from "./_components/sidenav";
 import Sidepanel from "./_components/sidepanel";
+import Signpanel from "./_components/signpanel";
 
 export default function ({ children }: { children: ReactNode }) {
   return (
@@ -22,9 +23,10 @@ export default function ({ children }: { children: ReactNode }) {
         <Header />
         <main className="flex-1 h-[10vh] mt-20 mb-20 overflow-x-hidden overflow-y-auto px-8 py-8">
           {children}
-          <Player />
         </main>
+        <Player />
       </div>
+      <Signpanel />
     </div>
   );
 }
