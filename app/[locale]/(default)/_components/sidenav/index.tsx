@@ -77,7 +77,7 @@ export default function () {
           <h2 className="mb-2 px-4 text-sm font-semibold tracking-tight">
             {t("music")}
           </h2>
-          <div className="space-y-1 w-[250px]">
+          <div className="space-y-1 w-[180px]">
             {musicNavs.map((nav: Nav, idx: number) => {
               return (
                 <Button

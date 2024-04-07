@@ -1,6 +1,8 @@
-import { FavoriteSong } from "@/types/song";
+import { FavoriteSong, Song } from "@/types/song";
+
 import { QueryResultRow } from "pg";
 import { getDb } from "./db";
+import { getSongsFromSqlResult } from "./song";
 
 export async function insertFavoriteSong(song: FavoriteSong) {
   const db = getDb();
@@ -49,6 +51,37 @@ export async function findFavoriteSong(
   const { rows } = res;
 
   return formatFavoriteSong(rows[0]);
+}
+
+export async function getUserFavoriteSongs(
+  user_uuid: string,
+  page: number,
+  limit: number
+): Promise<Song[] | undefined> {
+  if (page < 1) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
+  const db = getDb();
+  const res = await db.query(
+    `SELECT s.*, fs.updated_at FROM songs AS s 
+      LEFT JOIN favorite_songs AS fs 
+      ON s.uuid = fs.song_uuid 
+      WHERE fs.user_uuid = $1 AND fs.status = 'on' 
+      ORDER BY fs.updated_at DESC 
+      LIMIT $2 OFFSET $3`,
+    [user_uuid as any, limit, offset]
+  );
+
+  if (res.rowCount === 0) {
+    return undefined;
+  }
+
+  return getSongsFromSqlResult(res);
 }
 
 export function formatFavoriteSong(row: QueryResultRow): FavoriteSong {

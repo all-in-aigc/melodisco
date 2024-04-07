@@ -123,6 +123,28 @@ export default function () {
     }
   };
 
+  const updatePlaySong = async function (song_uuid: string) {
+    try {
+      const params = {
+        song_uuid: song_uuid,
+      };
+      const resp = await fetch("/api/update-play-song", {
+        method: "POST",
+        headers: {
+          "Content-Type": "applicaion/json",
+        },
+        body: JSON.stringify(params),
+      });
+      const { code, message } = await resp.json();
+
+      if (code !== 0) {
+        console.log("update play song failed: ", message);
+      }
+    } catch (e) {
+      console.log("update play song failed:", e);
+    }
+  };
+
   const toggleLike = () => {
     if (!song || !song.uuid) {
       return;
@@ -360,6 +382,9 @@ export default function () {
     audio.src = song.audio_url;
     audio.play();
 
+    console.log("update play song", song);
+    updatePlaySong(song.uuid);
+
     return () => {
       audio.removeEventListener("timeupdate", updateProgress);
       audio.removeEventListener("durationchange", setAudioDuration);
@@ -373,7 +398,7 @@ export default function () {
       return;
     }
 
-    audio.play();
+    // audio.play();
   }, [audioRef.current]);
 
   return (

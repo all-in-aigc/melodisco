@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import Playlist from "../_components/playlist";
+import Sign from "../_components/sign";
 import { Song } from "@/types/song";
 import { useAppContext } from "@/contexts/app";
 import { useTranslations } from "next-intl";
@@ -40,13 +41,11 @@ export default function () {
   };
 
   useEffect(() => {
-    if (user && user.uuid) {
-      fetchSongs(1);
-    }
+    fetchSongs(1);
   }, [user]);
 
   return (
-    <div>
+    <div className="h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold tracking-tight">
@@ -56,7 +55,13 @@ export default function () {
         </div>
       </div>
 
-      <Playlist loading={loading} songs={songs} />
+      {user ? (
+        <Playlist loading={loading} songs={songs} />
+      ) : (
+        <div className="flex-1 flex justify-center items-center">
+          <Sign />
+        </div>
+      )}
     </div>
   );
 }

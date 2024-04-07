@@ -8,11 +8,8 @@ import { useSession } from "next-auth/react";
 
 export default function () {
   const { data: session, status } = useSession();
-  const { user, setUser } = useAppContext();
 
   const oneTapLogin = async function () {
-    // console.log("onetap login trigger");
-
     const options = {
       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       auto_select: false,

@@ -197,35 +197,14 @@ export function getSongsFromSqlResult(
   return songs;
 }
 
-export async function getUserFavoriteSongs(
-  user_uuid: string,
-  page: number,
-  limit: number
-): Promise<Song[] | undefined> {
-  if (page < 1) {
-    page = 1;
-  }
-  if (limit <= 0) {
-    limit = 50;
-  }
-  const offset = (page - 1) * limit;
-
+export async function increasePlayCount(song_uuid: string) {
   const db = getDb();
   const res = await db.query(
-    `SELECT s.*, fs.updated_at FROM songs AS s 
-      LEFT JOIN favorite_songs AS fs 
-      ON s.uuid = fs.song_uuid 
-      WHERE fs.user_uuid = $1 AND fs.status = 'on' 
-      ORDER BY fs.updated_at DESC 
-      LIMIT $2 OFFSET $3`,
-    [user_uuid as any, limit, offset]
+    `UPDATE songs SET play_count = play_count + 1 WHERE uuid = $1`,
+    [song_uuid]
   );
 
-  if (res.rowCount === 0) {
-    return undefined;
-  }
-
-  return getSongsFromSqlResult(res);
+  return res;
 }
 
 export function formatSong(row: QueryResultRow): Song | undefined {

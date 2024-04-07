@@ -47,10 +47,7 @@ CREATE TABLE favorite_songs (
 CREATE TABLE play_songs (
     song_uuid VARCHAR(255) NOT NULL,
     user_uuid VARCHAR(255) NOT NULL,
-    created_at timestamptz,
-    updated_at timestamptz,
-    is_signin BOOLEAN,
-    status VARCHAR(50)
+    created_at timestamptz
 );
 
 CREATE TABLE upvote_songs (

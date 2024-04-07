@@ -32,14 +32,14 @@ export async function POST(req: Request) {
         updated_at: current_time,
         status: status,
       };
-      await insertFavoriteSong(favoriteSong);
+      insertFavoriteSong(favoriteSong);
 
       return respData(favoriteSong);
     }
 
     favoriteSong.status = status;
     favoriteSong.updated_at = current_time;
-    await updateFavoriteSong(favoriteSong);
+    updateFavoriteSong(favoriteSong);
 
     return respData(favoriteSong);
   } catch (e) {

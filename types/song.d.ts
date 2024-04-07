@@ -27,3 +27,9 @@ export interface FavoriteSong {
   updated_at: string;
   status: string;
 }
+
+export interface PlaySong {
+  song_uuid: string;
+  user_uuid: string;
+  created_at: string;
+}
