@@ -106,13 +106,13 @@ export default function () {
           <h2 className="mb-2 px-4 text-sm font-semibold tracking-tight">
             {t("music")}
           </h2>
-          <div className="space-y-1">{Navs(musicNavs)}</div>
+          <div className="space-y-1 w-40">{Navs(musicNavs)}</div>
         </div>
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-sm font-semibold tracking-tight">
             {t("library")}
           </h2>
-          <div className="space-y-1">{Navs(libraryNavs)}</div>
+          <div className="space-y-1 w-40">{Navs(libraryNavs)}</div>
         </div>
 
         {/* <div className="py-2">
