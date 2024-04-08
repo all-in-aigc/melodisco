@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /*?*q=
+Disallow: /search/
+Disallow: /zh/search/
+Disallow: /ja/search/
+Disallow: /ko/search/
+Disallow: /ru/search/
+Disallow: /fr/search/
+Disallow: /de/search/
+Disallow: /en/search/
+Disallow: /ar/search/
