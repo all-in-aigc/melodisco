@@ -32,7 +32,7 @@ export default function ({
           <Skeleton />
         </div>
       ) : (
-        <ScrollArea className="whitespace-nowrap mt-4">
+        <ScrollArea className="w-96 md:w-full whitespace-nowrap mt-4">
           <div className="flex w-max space-x-4 p-4">
             {songs
               .filter((item: Song) => item.title && item.image_url)
