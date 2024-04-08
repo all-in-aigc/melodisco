@@ -4,6 +4,7 @@ import {
   MdLocalFireDepartment,
   MdMusicNote,
   MdOutlineFavorite,
+  MdOutlineLibraryMusic,
   MdOutlinePlayCircleOutline,
   MdOutlineRadio,
   MdOutlineRssFeed,
@@ -49,12 +50,21 @@ export default function () {
       icon: <MdOutlineRadio className="text-lg" />,
       active: pathname.endsWith("roaming"),
     },
-    // {
-    //   title: t("playlists"),
-    //   url: "/playlists",
-    //   icon: <PiPlaylistDuotone className="text-lg" />,
-    //   active: pathname.endsWith("playlists"),
-    // },
+    {
+      title: t("playlists"),
+      url: "/playlists",
+      icon: <PiPlaylistDuotone className="text-lg" />,
+      active: pathname.endsWith("playlists"),
+    },
+  ];
+
+  const toolsNavs: Nav[] = [
+    {
+      title: t("create"),
+      url: `/create`,
+      icon: <MdOutlineLibraryMusic className="text-lg" />,
+      active: pathname.endsWith("create"),
+    },
   ];
 
   const getNavUrl = (nav: Nav) => {
@@ -123,6 +133,7 @@ export default function () {
           </p>
           <div className="space-y-1 w-40">{Navs(musicNavs)}</div>
         </div>
+
         <div className="px-3 py-2">
           <p className="mb-2 px-4 text-sm font-semibold tracking-tight">
             {t("library")}
@@ -130,14 +141,12 @@ export default function () {
           <div className="space-y-1 w-40">{Navs(libraryNavs)}</div>
         </div>
 
-        {/* <div className="py-2">
-          <p className="relative px-7 text-lg font-semibold tracking-tight">
-            Playlists
+        <div className="px-3 py-2">
+          <p className="mb-2 px-4 text-sm font-semibold tracking-tight">
+            {t("tools")}
           </p>
-          <ScrollArea className="h-[300px] px-1">
-            <div className="space-y-1 p-2"></div>
-          </ScrollArea>
-        </div> */}
+          <div className="space-y-1 w-40">{Navs(toolsNavs)}</div>
+        </div>
       </div>
     </div>
   );

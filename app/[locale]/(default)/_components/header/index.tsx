@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Locales from "../locales";
 import { Menu } from "lucide-react";
+import Producthunt from "../producthunt";
 import Sidenav from "../sidenav";
 import Sidepanel from "../sidepanel";
 import Theme from "../theme";
@@ -48,6 +49,11 @@ export default function () {
           </span>
         </Link>
       </div>
+
+      <div className="hidden md:block md:ml-8">
+        <Producthunt />
+      </div>
+
       <div className="w-full flex-1">
         {/* <form>
           <div className="relative">

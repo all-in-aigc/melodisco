@@ -1,22 +1,38 @@
+import Crumb from "../_components/crumb";
 import Describe from "../_components/create/describe";
 import Info from "../_components/create/info";
+import { Nav } from "@/types/nav";
 import Preview from "../_components/create/preview";
+import { getTranslations } from "next-intl/server";
 
-export default function () {
+export default async function () {
+  const t = await getTranslations("nav");
+
+  const crumbNavs: Nav[] = [
+    {
+      title: t("home"),
+      url: "/",
+    },
+    {
+      title: t("create"),
+      active: true,
+    },
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto mt-16">
-      <h1 className="text-center font-bold text-5xl">Create AI Song</h1>
-      <div className="flex items-start mt-16">
-        <div className="w-1/3 px-4">
-          <Describe />
-        </div>
-        <div className="w-1/3 px-4">
-          <Info />
-        </div>
-        <div className="flex-1">
-          <Preview />
+    <div>
+      <Crumb navs={crumbNavs} />
+
+      <div className="flex items-center justify-between mb-4">
+        <div className="space-y-2">
+          <h1 className="text-2xl font-semibold tracking-tight">
+            {t("create")}
+          </h1>
+          <p className="text-sm text-muted-foreground"></p>
         </div>
       </div>
+
+      <div>coming soon...</div>
     </div>
   );
 }

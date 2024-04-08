@@ -33,7 +33,9 @@
     "recommended": "الموصى به",
     "playlists": "قوائم التشغيل",
     "favorites": "المفضلة",
-    "recently": "المؤخرة"
+    "recently": "المؤخرة",
+    "tools": "الأدوات",
+    "create": "إنشاء موسيقى"
   },
   "song": {
     "title": "العنوان",

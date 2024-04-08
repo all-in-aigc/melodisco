@@ -33,7 +33,9 @@
     "recommended": "おすすめ",
     "playlists": "プレイリスト",
     "favorites": "お気に入り",
-    "recently": "最近"
+    "recently": "最近",
+    "tools": "ツール",
+    "create": "音楽を作成"
   },
   "song": {
     "title": "タイトル",

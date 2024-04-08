@@ -33,7 +33,9 @@
     "recommended": "Empfohlen",
     "playlists": "Playlisten",
     "favorites": "Favoriten",
-    "recently": "Kürzlich gespielt"
+    "recently": "Kürzlich gespielt",
+    "tools": "Werkzeuge",
+    "create": "Musik erstellen"
   },
   "song": {
     "title": "Titel",

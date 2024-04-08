@@ -33,7 +33,9 @@
     "recommended": "추천",
     "playlists": "플레이리스트",
     "favorites": "즐겨찾기",
-    "recently": "최근 재생"
+    "recently": "최근 재생",
+    "tools": "도구",
+    "create": "음악 만들기"
   },
   "song": {
     "title": "제목",

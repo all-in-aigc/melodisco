@@ -33,7 +33,9 @@
     "recommended": "推荐歌曲",
     "playlists": "推荐歌单",
     "favorites": "我喜欢的音乐",
-    "recently": "最近播放"
+    "recently": "最近播放",
+    "tools": "工具",
+    "create": "创建音乐"
   },
   "song": {
     "title": "标题",
