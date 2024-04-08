@@ -1,11 +1,12 @@
 "use client";
 
 import { ContextProviderProps, ContextProviderValue } from "@/types/context";
+import { cacheGet, cacheSet } from "@/utils/cache";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { Song } from "@/types/song";
 import { User } from "@/types/user";
-import { cacheGet } from "@/utils/cache";
+import { getTimestamp } from "@/utils/time";
 import useOneTapLogin from "@/hooks/useOneTapLogin";
 
 export const useAppContext = () => useContext(AppContext);
@@ -22,14 +23,31 @@ export const AppContextProvider = ({ children }: ContextProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [playlist, setPlaylist] = useState<Song[]>([]);
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
-  const [currentSongIndex, setCurrentSongIndex] = useState(9);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
   const appendPlaylist = (newSong: Song) => {
     console.log("add newsong", newSong);
     setPlaylist((currentPlaylist) => [newSong, ...currentPlaylist]);
   };
 
+  const loadPlaylist = () => {
+    const _playlist = cacheGet("PLAYLIST");
+    const _play_idx = cacheGet("PLAY_IDX") || "0";
+    if (_playlist) {
+      const playlist = JSON.parse(_playlist);
+      let play_idx = Number(_play_idx);
+      if (play_idx < 0 || play_idx >= playlist.length) {
+        play_idx = 0;
+      }
+
+      setPlaylist(playlist);
+      setCurrentSongIndex(play_idx);
+    }
+  };
+
   useEffect(() => {
+    loadPlaylist();
+
     const themeInCache = cacheGet("THEME");
     if (themeInCache && ["dark", "light"].includes(themeInCache)) {
       setTheme(themeInCache);
@@ -48,6 +66,20 @@ export const AppContextProvider = ({ children }: ContextProviderProps) => {
       mediaQuery.removeListener(handleChange);
     };
   }, []);
+
+  useEffect(() => {
+    if (playlist && playlist.length > 0) {
+      const expires = getTimestamp() + 2592000; // 30 days
+      cacheSet("PLAYLIST", JSON.stringify(playlist), expires);
+    }
+  }, [playlist]);
+
+  useEffect(() => {
+    if (currentSongIndex >= 0) {
+      const expires = getTimestamp() + 2592000; // 30 days
+      cacheSet("PLAY_IDX", currentSongIndex.toString(), expires);
+    }
+  }, [currentSongIndex]);
 
   return (
     <AppContext.Provider

@@ -1,9 +1,13 @@
 import Header from "./_components/header";
-import Player from "./_components/player";
 import { ReactNode } from "react";
 import Sidenav from "./_components/sidenav";
 import Sidepanel from "./_components/sidepanel";
 import Signpanel from "./_components/signpanel";
+import dynamic from "next/dynamic";
+
+const Player = dynamic(() => import("./_components/player"), {
+  ssr: false,
+});
 
 export default function ({ children }: { children: ReactNode }) {
   return (

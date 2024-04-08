@@ -382,7 +382,6 @@ export default function () {
     audio.src = song.audio_url;
     audio.play();
 
-    console.log("update play song", song);
     updatePlaySong(song.uuid);
 
     return () => {
@@ -398,8 +397,10 @@ export default function () {
       return;
     }
 
-    // audio.play();
+    audio.play();
   }, [audioRef.current]);
+
+  useEffect(() => {}, []);
 
   return (
     <>

@@ -16,14 +16,14 @@ export const locales = [
   "ar",
 ];
 export const localeNames: any = {
-  en: "🇺🇸 English",
-  zh: "🇨🇳 中文",
-  ja: "🇯🇵 日本語",
-  ko: "🇰🇷 한국어",
-  ru: "🇷🇺 Русский",
-  fr: "🇫🇷 Français",
-  de: "🇩🇪 Deutsch",
-  ar: "🇪🇬 اَلْعَرَبِيَّةُ",
+  en: "English",
+  zh: "中文",
+  ja: "日本語",
+  ko: "한국어",
+  ru: "Русский",
+  fr: "Français",
+  de: "Deutsch",
+  ar: "اَلْعَرَبِيَّةُ",
 };
 
 export const defaultLocale = "en";

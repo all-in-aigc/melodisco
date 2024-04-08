@@ -1,12 +1,21 @@
 {
   "metadata": {
-    "title": "Melodisco - AIミュージックプレーヤー",
-    "description": "AIが生み出す魅惑の音楽世界を発見",
-    "detail": "Melodisco - AIミュージックプレーヤー提供"
+    "title": "Melodisco - AI音楽プレーヤー",
+    "description": "MelodiscoはAI音楽プレーヤーおよびジェネレーターです。Sunoによって生成されたAIメロディーを探索し、自分自身のAIソングを作成しましょう。",
+    "discover_title": "Melodisco - AI音楽プレーヤーでAIソングを発見",
+    "discover_description": "Melodisco - AI音楽プレーヤーでトレンディング、最新、ランダムなAIソングを発見",
+    "trending_title": "Melodisco - AI音楽プレーヤーのトレンディングAIソング",
+    "trending_description": "Melodisco - AI音楽プレーヤーのトップ50トレンディングAIソング",
+    "newest_title": "Melodisco - AI音楽プレーヤーの最新AIソング",
+    "newest_description": "Melodisco - AI音楽プレーヤーのトップ50最新AIソング",
+    "roaming_title": "Melodisco - AI音楽プレーヤーのランダムAIソング",
+    "roaming_description": "Melodisco - AI音楽プレーヤーのランダム50AIソング",
+    "song_title": "%s：Melodisco - AI音楽プレーヤーでのAIソング",
+    "song_description": "%s：Sunoによって生成されたAIソング、Melodisco - AI音楽プレーヤーで再生中"
   },
   "brand": {
     "name": "Melodisco",
-    "tagline": "AIが生み出す魅惑の音楽世界を発見"
+    "tagline": "AI音楽プレーヤー、AI生成ソングを発見"
   },
   "user": {
     "sign_in": "サインイン",
@@ -14,12 +23,13 @@
     "feedback": "フィードバック"
   },
   "nav": {
+    "home": "ホーム",
     "music": "音楽",
     "library": "ライブラリ",
     "discover": "発見",
-    "trending": "トレンド",
+    "trending": "トレンディング",
     "newest": "最新",
-    "roaming": "ローミング",
+    "roaming": "ランダム",
     "recommended": "おすすめ",
     "playlists": "プレイリスト",
     "favorites": "お気に入り",

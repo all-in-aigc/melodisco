@@ -1,12 +1,21 @@
 {
   "metadata": {
-    "title": "Melodisco - AI Музыкальный Плеер",
-    "description": "Откройте для себя очаровательный мир музыки, созданной искусственным интеллектом",
-    "detail": "от Melodisco - AI Музыкальный Плеер"
+    "title": "Melodisco - AI музыкальный плеер",
+    "description": "Melodisco - это AI музыкальный плеер и генератор. Исследуйте мелодии, созданные AI от Suno, и создавайте свои собственные AI песни.",
+    "discover_title": "Откройте для себя AI песни в Melodisco - AI музыкальный плеер",
+    "discover_description": "Откройте для себя трендовые, новейшие и случайные AI песни в Melodisco - AI музыкальный плеер",
+    "trending_title": "Трендовые AI песни в Melodisco - AI музыкальный плеер",
+    "trending_description": "Топ 50 трендовых AI песен в Melodisco - AI музыкальный плеер",
+    "newest_title": "Новейшие AI песни в Melodisco - AI музыкальный плеер",
+    "newest_description": "Топ 50 новейших AI песен в Melodisco - AI музыкальный плеер",
+    "roaming_title": "Случайные AI песни в Melodisco - AI музыкальный плеер",
+    "roaming_description": "50 случайных AI песен в Melodisco - AI музыкальный плеер",
+    "song_title": "%s: AI песня в Melodisco - AI музыкальный плеер",
+    "song_description": "%s: AI песня, созданная Suno, играет в Melodisco - AI музыкальный плеер"
   },
   "brand": {
     "name": "Melodisco",
-    "tagline": "Откройте для себя очаровательный мир музыки, созданной искусственным интеллектом"
+    "tagline": "AI музыкальный плеер, откройте для себя песни, созданные AI"
   },
   "user": {
     "sign_in": "Войти",
@@ -14,12 +23,13 @@
     "feedback": "Обратная связь"
   },
   "nav": {
+    "home": "Главная",
     "music": "Музыка",
     "library": "Библиотека",
     "discover": "Открыть",
-    "trending": "Популярное",
+    "trending": "Тренды",
     "newest": "Новинки",
-    "roaming": "Прогулки",
+    "roaming": "Случайные",
     "recommended": "Рекомендуемые",
     "playlists": "Плейлисты",
     "favorites": "Избранное",
@@ -29,7 +39,7 @@
     "title": "Название",
     "tags": "Теги",
     "duration": "Длительность",
-    "lyrics": "Тексты песен",
+    "lyrics": "Текст песни",
     "play": "Воспроизвести"
   }
 }

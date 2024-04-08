@@ -48,9 +48,9 @@ export default function () {
     <div className="h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-2xl font-semibold tracking-tight">
             {t("favorites")}
-          </h2>
+          </h1>
           <p className="text-sm text-muted-foreground"></p>
         </div>
       </div>

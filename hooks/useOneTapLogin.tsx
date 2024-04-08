@@ -32,8 +32,6 @@ export default function () {
   };
 
   useEffect(() => {
-    console.log("one tap login status", status, session);
-
     if (status === "unauthenticated") {
       oneTapLogin();
 

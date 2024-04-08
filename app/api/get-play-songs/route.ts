@@ -3,6 +3,8 @@ import { respData, respErr } from "@/utils/resp";
 import { getUserPlaySongs } from "@/models/play_song";
 import { getUserUuid } from "@/services/user";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   try {
     const { page, limit } = await req.json();

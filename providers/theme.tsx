@@ -10,7 +10,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { theme } = useContext(AppContext);
 
   return (
-    <body className={`${inter.className} w-screen h-screen`} data-theme={theme}>
+    <body className={`w-screen h-screen`} data-theme={theme}>
       {children}
     </body>
   );

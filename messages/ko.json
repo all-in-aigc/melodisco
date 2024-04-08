@@ -1,12 +1,21 @@
 {
   "metadata": {
     "title": "Melodisco - AI 음악 플레이어",
-    "description": "AI가 생성한 매혹적인 음악 세계를 발견하세요",
-    "detail": "Melodisco - AI 음악 플레이어 제공"
+    "description": "Melodisco는 AI 음악 플레이어 및 생성기입니다. Suno가 생성한 AI 멜로디를 탐색하고, 자신만의 AI 노래를 만들어보세요.",
+    "discover_title": "Melodisco - AI 음악 플레이어에서 AI 노래 발견하기",
+    "discover_description": "Melodisco - AI 음악 플레이어에서 트렌딩, 최신, 랜덤 AI 노래 발견하기",
+    "trending_title": "Melodisco - AI 음악 플레이어의 트렌딩 AI 노래",
+    "trending_description": "Melodisco - AI 음악 플레이어의 상위 50개 트렌딩 AI 노래",
+    "newest_title": "Melodisco - AI 음악 플레이어의 최신 AI 노래",
+    "newest_description": "Melodisco - AI 음악 플레이어의 상위 50개 최신 AI 노래",
+    "roaming_title": "Melodisco - AI 음악 플레이어의 랜덤 AI 노래",
+    "roaming_description": "Melodisco - AI 음악 플레이어의 50개 랜덤 AI 노래",
+    "song_title": "%s: Melodisco - AI 음악 플레이어에서의 AI 노래",
+    "song_description": "%s: Suno가 생성한 AI 노래, Melodisco - AI 음악 플레이어에서 재생 중"
   },
   "brand": {
     "name": "Melodisco",
-    "tagline": "AI가 생성한 매혹적인 음악 세계를 발견하세요"
+    "tagline": "AI 음악 플레이어, AI 생성 노래 발견하기"
   },
   "user": {
     "sign_in": "로그인",
@@ -14,16 +23,17 @@
     "feedback": "피드백"
   },
   "nav": {
+    "home": "홈",
     "music": "음악",
     "library": "라이브러리",
     "discover": "발견하기",
     "trending": "트렌딩",
     "newest": "최신",
-    "roaming": "둘러보기",
+    "roaming": "랜덤",
     "recommended": "추천",
     "playlists": "플레이리스트",
     "favorites": "즐겨찾기",
-    "recently": "최근에"
+    "recently": "최근 재생"
   },
   "song": {
     "title": "제목",

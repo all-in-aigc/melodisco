@@ -1,6 +1,9 @@
+"use client";
+
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 import Image from "next/image";
+import Link from "next/link";
 import Skeleton from "../skeleton";
 import { Song } from "@/types/song";
 import { useAppContext } from "@/contexts/app";
@@ -16,7 +19,6 @@ export default function ({
     useAppContext();
 
   const updatePlaylist = function (song: Song, idx: number) {
-    console.log("update playlists", song, songs);
     if (!songs) {
       return;
     }
@@ -64,7 +66,13 @@ export default function ({
                       )}
                     </div>
                     <figcaption className="pt-2 text-xs text-base-content truncate">
-                      <span className="font-semibold">{song.title}</span>
+                      <Link
+                        href={`/song/${song.uuid}`}
+                        className="font-semibold hover:underline"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {song.title}
+                      </Link>
                     </figcaption>
                   </figure>
                 );

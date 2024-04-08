@@ -8,6 +8,8 @@ import { Song } from "@/types/song";
 import { useAppContext } from "@/contexts/app";
 import { useTranslations } from "next-intl";
 
+export const maxDuration = 120;
+
 export default function () {
   const t = useTranslations("nav");
 
@@ -48,9 +50,9 @@ export default function () {
     <div className="h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-2xl font-semibold tracking-tight">
             {t("recently")}
-          </h2>
+          </h1>
           <p className="text-sm text-muted-foreground"></p>
         </div>
       </div>

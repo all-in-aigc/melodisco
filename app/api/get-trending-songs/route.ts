@@ -2,6 +2,8 @@ import { respData, respErr } from "@/utils/resp";
 
 import { getTrendingSongs } from "@/models/song";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   try {
     const { page, limit } = await req.json();

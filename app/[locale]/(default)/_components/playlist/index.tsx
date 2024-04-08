@@ -1,3 +1,5 @@
+"use client";
+
 import { MdHeadset, MdOutlineThumbUp } from "react-icons/md";
 import {
   Table,
@@ -9,6 +11,7 @@ import {
 } from "@/components/ui/table";
 
 import Image from "next/image";
+import Link from "next/link";
 import Skeleton from "../skeleton";
 import { Song } from "@/types/song";
 import { useAppContext } from "@/contexts/app";
@@ -36,7 +39,6 @@ export default function ({
   };
 
   const updatePlaylist = function (song: Song, idx: number) {
-    console.log("update playlists", song, songs);
     if (!songs) {
       return;
     }
@@ -93,16 +95,15 @@ export default function ({
                       />
                     </TableCell>
                     <TableCell className="font-medium max-w-[120px] truncate">
-                      <p
+                      <Link
                         className="hover:underline truncate"
+                        href={`/song/${song.uuid}`}
                         onClick={(e) => {
-                          return;
                           e.stopPropagation();
-                          router.push(`/song/${song.uuid}`);
                         }}
                       >
                         {song.title}
-                      </p>
+                      </Link>
                       <div className="flex items-center gap-x-4 mt-1">
                         <div className="flex items-center gap-x-0.5">
                           <MdHeadset />

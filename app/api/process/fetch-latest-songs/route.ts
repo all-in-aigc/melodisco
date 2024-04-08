@@ -4,6 +4,8 @@ import { respData, respErr } from "@/utils/resp";
 import { Song } from "@/types/song";
 import { getLatestSongs } from "@/services/suno";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   try {
     const { page } = await req.json();

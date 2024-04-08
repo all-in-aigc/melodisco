@@ -1,12 +1,21 @@
 {
   "metadata": {
     "title": "Melodisco - AI Musikplayer",
-    "description": "Entdecken Sie die bezaubernde Welt der von KI generierten Musik",
-    "detail": "von Melodisco - AI Musikplayer"
+    "description": "Melodisco ist ein AI Musikplayer und Generator. Entdecken Sie von Suno generierte AI-Melodien und erstellen Sie Ihre eigenen AI-Songs.",
+    "discover_title": "Entdecken Sie AI-Songs in Melodisco - AI Musikplayer",
+    "discover_description": "Entdecken Sie trendige, neueste und zufällige AI-Songs in Melodisco - AI Musikplayer",
+    "trending_title": "Trendige AI-Songs in Melodisco - AI Musikplayer",
+    "trending_description": "Top 50 trendige AI-Songs in Melodisco - AI Musikplayer",
+    "newest_title": "Neueste AI-Songs in Melodisco - AI Musikplayer",
+    "newest_description": "Top 50 neueste AI-Songs in Melodisco - AI Musikplayer",
+    "roaming_title": "Zufällige AI-Songs in Melodisco - AI Musikplayer",
+    "roaming_description": "50 zufällige AI-Songs in Melodisco - AI Musikplayer",
+    "song_title": "%s: AI-Song in Melodisco - AI Musikplayer",
+    "song_description": "%s: Von Suno generierter AI-Song, gespielt in Melodisco - AI Musikplayer"
   },
   "brand": {
     "name": "Melodisco",
-    "tagline": "Entdecken Sie die bezaubernde Welt der von KI generierten Musik"
+    "tagline": "AI Musikplayer, entdecken Sie AI-generierte Songs"
   },
   "user": {
     "sign_in": "Anmelden",
@@ -14,22 +23,23 @@
     "feedback": "Feedback"
   },
   "nav": {
+    "home": "Startseite",
     "music": "Musik",
     "library": "Bibliothek",
     "discover": "Entdecken",
     "trending": "Trends",
-    "newest": "Neueste",
-    "roaming": "Stöbern",
+    "newest": "Neuheiten",
+    "roaming": "Zufällig",
     "recommended": "Empfohlen",
-    "playlists": "Playlists",
+    "playlists": "Playlisten",
     "favorites": "Favoriten",
-    "recently": "Kürzlich"
+    "recently": "Kürzlich gespielt"
   },
   "song": {
     "title": "Titel",
     "tags": "Tags",
     "duration": "Dauer",
-    "lyrics": "Texte",
+    "lyrics": "Lyrics",
     "play": "Abspielen"
   }
 }

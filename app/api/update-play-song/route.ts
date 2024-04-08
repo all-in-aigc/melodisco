@@ -6,6 +6,8 @@ import { getUserUuid } from "@/services/user";
 import { increasePlayCount } from "@/models/song";
 import { insertPlaySong } from "@/models/play_song";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   try {
     const { song_uuid } = await req.json();

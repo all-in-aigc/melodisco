@@ -1,29 +1,39 @@
 {
   "metadata": {
     "title": "Melodisco - Lecteur de Musique AI",
-    "description": "Découvrez le monde enchanteur de la musique générée par IA",
-    "detail": "par Melodisco - Lecteur de Musique AI"
+    "description": "Melodisco est un lecteur et générateur de musique AI. Explorez les mélodies générées par AI de Suno et créez vos propres chansons AI.",
+    "discover_title": "Découvrez les Chansons AI dans Melodisco - Lecteur de Musique AI",
+    "discover_description": "Découvrez les Chansons AI Tendances, les Plus Récentes et Aléatoires dans Melodisco - Lecteur de Musique AI",
+    "trending_title": "Chansons AI Tendances dans Melodisco - Lecteur de Musique AI",
+    "trending_description": "Top 50 des Chansons AI Tendances dans Melodisco - Lecteur de Musique AI",
+    "newest_title": "Nouvelles Chansons AI dans Melodisco - Lecteur de Musique AI",
+    "newest_description": "Top 50 des Nouvelles Chansons AI dans Melodisco - Lecteur de Musique AI",
+    "roaming_title": "Chansons AI Aléatoires dans Melodisco - Lecteur de Musique AI",
+    "roaming_description": "50 Chansons AI Aléatoires dans Melodisco - Lecteur de Musique AI",
+    "song_title": "%s : Chanson AI dans Melodisco - Lecteur de Musique AI",
+    "song_description": "%s : Chanson AI générée par Suno, jouée dans Melodisco - Lecteur de Musique AI"
   },
   "brand": {
     "name": "Melodisco",
-    "tagline": "Découvrez le monde enchanteur de la musique générée par IA"
+    "tagline": "Lecteur de Musique AI, Découvrez les Chansons Générées par AI"
   },
   "user": {
     "sign_in": "Se connecter",
     "sign_out": "Se déconnecter",
-    "feedback": "Retour d'information"
+    "feedback": "Retour"
   },
   "nav": {
+    "home": "Accueil",
     "music": "Musique",
     "library": "Bibliothèque",
     "discover": "Découvrir",
-    "trending": "Tendance",
-    "newest": "Les plus récents",
-    "roaming": "Flâner",
+    "trending": "Tendances",
+    "newest": "Nouveautés",
+    "roaming": "Aléatoire",
     "recommended": "Recommandé",
     "playlists": "Playlists",
     "favorites": "Favoris",
-    "recently": "Récemment"
+    "recently": "Récemment écoutés"
   },
   "song": {
     "title": "Titre",

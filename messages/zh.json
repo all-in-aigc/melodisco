@@ -1,32 +1,42 @@
 {
   "metadata": {
     "title": "Melodisco - AI 音乐播放器",
-    "description": "探索 AI 音乐的世界",
-    "detail": "由 Melodisco - AI 音乐播放器提供"
+    "description": "Melodisco 是一个 AI 音乐播放器和生成器。探索Suno生成的AI旋律，并创作你自己的AI歌曲。",
+    "discover_title": "发现 | Melodisco - AI 音乐播放器",
+    "discover_description": "在Melodisco - AI音乐播放器中发现流行的、最新的和随机的AI歌曲",
+    "trending_title": "流行 | Melodisco - AI 音乐播放器",
+    "trending_description": "Melodisco - AI音乐播放器中前50热门AI歌曲",
+    "newest_title": "最新音乐 | Melodisco - AI 音乐播放器",
+    "newest_description": "Melodisco - AI音乐播放器中前50最新AI歌曲",
+    "roaming_title": "随机播放 | Melodisco - AI 音乐播放器",
+    "roaming_description": "Melodisco - AI音乐播放器中的50首随机AI歌曲",
+    "song_title": "%s：在 Melodisco - AI 音乐播放器中的歌曲",
+    "song_description": "%s：由Suno生成的AI歌曲，在Melodisco - AI音乐播放器中播放"
   },
   "brand": {
     "name": "Melodisco",
-    "tagline": "探索 AI 音乐的世界"
+    "tagline": "AI 音乐播放器"
   },
   "user": {
     "sign_in": "登录",
-    "sign_out": "登出",
+    "sign_out": "退出登录",
     "feedback": "反馈"
   },
   "nav": {
+    "home": "首页",
     "music": "音乐",
     "library": "私人",
     "discover": "发现音乐",
     "trending": "大家都在听",
     "newest": "最新音乐",
-    "roaming": "随便听听",
-    "recommended": "推荐音乐",
+    "roaming": "随机播放",
+    "recommended": "推荐歌曲",
     "playlists": "推荐歌单",
     "favorites": "我喜欢的音乐",
     "recently": "最近播放"
   },
   "song": {
-    "title": "歌名",
+    "title": "标题",
     "tags": "标签",
     "duration": "时长",
     "lyrics": "歌词",
