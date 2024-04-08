@@ -20,7 +20,8 @@
   "user": {
     "sign_in": "Sign in",
     "sign_out": "Sign out",
-    "feedback": "Feedback"
+    "feedback": "Feedback",
+    "sign_tip": "You are not authorized, please sign in."
   },
   "nav": {
     "home": "Home",

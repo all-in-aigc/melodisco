@@ -55,13 +55,7 @@ export default function () {
         </div>
       </div>
 
-      {user ? (
-        <Playlist loading={loading} songs={songs} />
-      ) : (
-        <div className="flex-1 flex justify-center items-center">
-          <Sign />
-        </div>
-      )}
+      {user ? <Playlist loading={loading} songs={songs} /> : <Sign />}
     </div>
   );
 }

@@ -20,7 +20,8 @@
   "user": {
     "sign_in": "로그인",
     "sign_out": "로그아웃",
-    "feedback": "피드백"
+    "feedback": "피드백",
+    "sign_tip": "권한이 없습니다. 로그인해 주세요."
   },
   "nav": {
     "home": "홈",

@@ -20,7 +20,8 @@
   "user": {
     "sign_in": "登录",
     "sign_out": "退出登录",
-    "feedback": "反馈"
+    "feedback": "反馈",
+    "sign_tip": "账户未授权，请先登录"
   },
   "nav": {
     "home": "首页",

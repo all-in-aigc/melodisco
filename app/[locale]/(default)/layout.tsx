@@ -1,8 +1,10 @@
 import Header from "./_components/header";
+import Policy from "./_components/policy";
 import { ReactNode } from "react";
 import Sidenav from "./_components/sidenav";
 import Sidepanel from "./_components/sidepanel";
 import Signpanel from "./_components/signpanel";
+import Social from "./_components/social";
 import dynamic from "next/dynamic";
 
 const Player = dynamic(() => import("./_components/player"), {
@@ -15,11 +17,13 @@ export default function ({ children }: { children: ReactNode }) {
       <div className="hidden border-r border-base-300 md:block">
         <div className="flex h-full max-h-screen fixed flex-col gap-2">
           <div className="flex h-16 items-center border-b border-base-300 px-4 lg:h-[80px] lg:px-6"></div>
-          <div className="flex-1">
+          <div className="flex-1 overflow-y-auto">
             <Sidenav />
           </div>
-          <div className="mt-auto mb-24 p-4">
-            <Sidepanel />
+          <div className="px-4 pb-20">
+            {/* <Sidepanel /> */}
+            <Social />
+            <Policy />
           </div>
         </div>
       </div>

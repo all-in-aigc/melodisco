@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Locales from "../locales";
 import { Menu } from "lucide-react";
+import Policy from "../policy";
 import Producthunt from "../producthunt";
 import Sidenav from "../sidenav";
 import Sidepanel from "../sidepanel";
+import Social from "../social";
 import Theme from "../theme";
 import User from "../user";
 import { useAppContext } from "@/contexts/app";
@@ -35,8 +37,10 @@ export default function () {
           data-theme={theme}
         >
           <Sidenav />
-          <div className="mt-auto mb-40">
+          <div className="px-4 pb-8">
             <Sidepanel />
+            <Social />
+            <Policy />
           </div>
         </SheetContent>
       </Sheet>

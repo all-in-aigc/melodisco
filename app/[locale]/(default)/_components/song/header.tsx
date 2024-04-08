@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  MdHeadset,
-  MdOutlineDownload,
-  MdOutlinePlayArrow,
-  MdOutlineShare,
-} from "react-icons/md";
+import { MdHeadset, MdOutlinePlayArrow } from "react-icons/md";
 
 import { AiOutlineLike } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
@@ -83,12 +78,12 @@ export default function ({ song }: { song: Song }) {
           >
             <Share song={song} />
           </Button>
-          <Button
+          {/* <Button
             size="sm"
             className="hidden md:flex items-center gap-x-1 bg-base-300 text-base-content"
           >
             <MdOutlineDownload className="text-2xl" />
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

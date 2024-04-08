@@ -1,0 +1,22 @@
+@import url("../globals.css");
+
+h1 {
+  @apply text-2xl font-bold my-4;
+}
+
+h2 {
+  @apply text-xl font-bold my-4;
+}
+
+h3 {
+  @apply text-lg font-bold my-4;
+}
+
+ul li {
+  list-style: disc;
+  margin-left: 1rem;
+}
+
+a {
+  @apply text-primary;
+}

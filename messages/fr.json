@@ -20,7 +20,8 @@
   "user": {
     "sign_in": "Se connecter",
     "sign_out": "Se déconnecter",
-    "feedback": "Retour"
+    "feedback": "Retour",
+    "sign_tip": "Vous n'êtes pas autorisé, veuillez vous connecter."
   },
   "nav": {
     "home": "Accueil",
