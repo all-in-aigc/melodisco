@@ -33,11 +33,11 @@ export default function () {
         </SheetTrigger>
         <SheetContent
           side="left"
-          className="flex flex-col py-8 px-4 bg-base-200 border-base-300"
+          className="flex flex-col py-8 px-4 bg-base-200 border-base-300 overflow-y-auto"
           data-theme={theme}
         >
           <Sidenav />
-          <div className="px-4 pb-8">
+          <div className="">
             <Sidepanel />
             <Social />
             <Policy />
