@@ -20,6 +20,10 @@ export default async function ({ params }: { params: { uuid: string } }) {
     }
   }
 
+  if (song && song.status === "forbidden") {
+    return "403";
+  }
+
   const randomSongs = await getRandomSongs(1, 10);
 
   return (

@@ -70,6 +70,35 @@ export default function () {
     },
   ];
 
+  const Navs = (navs: Nav[]) => {
+    return (
+      <>
+        {navs.map((nav: Nav, idx: number) => {
+          return (
+            <Button
+              key={idx}
+              variant="ghost"
+              className={`md:w-full hover:bg-base-100 justify-start gap-x-1 ${
+                nav.active
+                  ? "text-primary hover:text-primary"
+                  : "hover:text-base-content"
+              }`}
+              onClick={() => {
+                if (nav.url) {
+                  router.push(nav.url);
+                  setIsSiderOpen(false);
+                }
+              }}
+            >
+              {nav.icon}
+              {nav.title}
+            </Button>
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <div className="pb-24">
       <div className="space-y-4 py-4">
@@ -77,55 +106,13 @@ export default function () {
           <h2 className="mb-2 px-4 text-sm font-semibold tracking-tight">
             {t("music")}
           </h2>
-          <div className="space-y-1">
-            {musicNavs.map((nav: Nav, idx: number) => {
-              return (
-                <Button
-                  key={idx}
-                  variant="ghost"
-                  className={`md:w-full hover:bg-base-100 justify-start gap-x-1 ${
-                    nav.active ? "text-primary hover:text-primary" : ""
-                  }`}
-                  onClick={() => {
-                    if (nav.url) {
-                      router.push(nav.url);
-                      setIsSiderOpen(false);
-                    }
-                  }}
-                >
-                  {nav.icon}
-                  {nav.title}
-                </Button>
-              );
-            })}
-          </div>
+          <div className="space-y-1">{Navs(musicNavs)}</div>
         </div>
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-sm font-semibold tracking-tight">
             {t("library")}
           </h2>
-          <div className="space-y-1">
-            {libraryNavs.map((nav: Nav, idx: number) => {
-              return (
-                <Button
-                  key={idx}
-                  variant="ghost"
-                  className={`md:w-full hover:bg-base-100 justify-start gap-x-1 ${
-                    nav.active ? "text-primary hover:text-primary" : ""
-                  }`}
-                  onClick={() => {
-                    if (nav.url) {
-                      router.push(nav.url);
-                      setIsSiderOpen(false);
-                    }
-                  }}
-                >
-                  {nav.icon}
-                  {nav.title}
-                </Button>
-              );
-            })}
-          </div>
+          <div className="space-y-1">{Navs(libraryNavs)}</div>
         </div>
 
         {/* <div className="py-2">

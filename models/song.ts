@@ -189,7 +189,7 @@ export function getSongsFromSqlResult(
   const { rows } = res;
   rows.forEach((row) => {
     const song = formatSong(row);
-    if (song) {
+    if (song && song.status === "complete") {
       songs.push(song);
     }
   });
@@ -205,6 +205,28 @@ export async function increasePlayCount(song_uuid: string) {
   );
 
   return res;
+}
+
+export function isSongSensitive(song: Song): boolean {
+  const sensitiveKeywords = process.env.SENSITIVE_KEYWORDS || "";
+  const keywordsArr = sensitiveKeywords.split(",");
+  for (let i = 0, l = keywordsArr.length; i < l; i++) {
+    const keyword = keywordsArr[i].trim();
+    if (!keyword) {
+      continue;
+    }
+    if (
+      (song.title && song.title.includes(keyword)) ||
+      (song.description && song.description.includes(keyword)) ||
+      (song.tags && song.tags.includes(keyword)) ||
+      (song.lyrics && song.lyrics.includes(keyword))
+    ) {
+      console.log("song is sensitive: ", song.uuid, song.title, keyword);
+      return true;
+    }
+  }
+
+  return false;
 }
 
 export function formatSong(row: QueryResultRow): Song | undefined {
@@ -229,6 +251,10 @@ export function formatSong(row: QueryResultRow): Song | undefined {
     is_public: row.is_public,
     is_trending: row.is_trending,
   };
+
+  if (isSongSensitive(song)) {
+    song.status = "forbidden";
+  }
 
   return song;
 }
