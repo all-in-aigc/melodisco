@@ -1,8 +1,8 @@
 import Crumb from "../_components/crumb";
-import Describe from "../_components/create/describe";
-import Info from "../_components/create/info";
+import Describe from "../_components/generator/describe";
+import Info from "../_components/generator/info";
 import { Nav } from "@/types/nav";
-import Preview from "../_components/create/preview";
+import Preview from "../_components/generator/preview";
 import { getTranslations } from "next-intl/server";
 
 export default async function () {

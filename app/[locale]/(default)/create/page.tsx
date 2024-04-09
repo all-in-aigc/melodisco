@@ -1,9 +1,28 @@
 import Crumb from "../_components/crumb";
-import Describe from "../_components/create/describe";
-import Info from "../_components/create/info";
+import Generator from "../_components/generator";
+import { Metadata } from "next";
 import { Nav } from "@/types/nav";
-import Preview from "../_components/create/preview";
 import { getTranslations } from "next-intl/server";
+
+export const maxDuration = 120;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+
+  return {
+    title: t("create_title"),
+    description: t("create_description"),
+    alternates: {
+      canonical: `${process.env.NEXTAUTH_URL}/${
+        params.locale !== "en" ? params.locale + "/" : ""
+      }create`,
+    },
+  };
+}
 
 export default async function () {
   const t = await getTranslations("nav");
@@ -20,7 +39,7 @@ export default async function () {
   ];
 
   return (
-    <div>
+    <div className="h-full flex flex-col">
       <Crumb navs={crumbNavs} />
 
       <div className="flex items-center justify-between mb-4">
@@ -32,7 +51,7 @@ export default async function () {
         </div>
       </div>
 
-      <div>coming soon...</div>
+      <Generator />
     </div>
   );
 }

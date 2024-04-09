@@ -4,8 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Song } from "@/types/song";
 import { useAppContext } from "@/contexts/app";
+import { useRouter } from "next/navigation";
 
 export default function ({ songs }: { songs: Song[] }) {
+  const router = useRouter();
+
   const { currentSong, appendPlaylist, setCurrentSong, setCurrentSongIndex } =
     useAppContext();
 
@@ -13,6 +16,7 @@ export default function ({ songs }: { songs: Song[] }) {
     appendPlaylist(song);
     setCurrentSong(song);
     setCurrentSongIndex(0);
+    router.push(`/song/${song.uuid}`);
   };
 
   return (
