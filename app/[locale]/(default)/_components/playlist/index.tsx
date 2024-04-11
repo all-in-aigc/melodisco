@@ -39,11 +39,14 @@ export default function ({
   };
 
   const updatePlaylist = function (song: Song, idx: number) {
-    console.log(song, idx, songs);
     if (!songs) {
       return;
     }
-    setPlaylist(songs);
+    setPlaylist(
+      songs.filter(
+        (item: Song) => item && item.audio_url && item.title && item.image_url
+      )
+    );
     setCurrentSong(song);
     setCurrentSongIndex(idx);
   };
@@ -121,7 +124,16 @@ export default function ({
                     </TableCell>
 
                     <TableCell className="font-medium max-w-[120px] md:max-w-sm truncate">
-                      {song.tags}
+                      <p>{song.tags}</p>
+                      <div
+                        className={`badge mt-1 ${
+                          song.provider === "udio"
+                            ? "bg-red-500 text-white"
+                            : "bg-primary"
+                        }`}
+                      >
+                        {song.provider}
+                      </div>
                     </TableCell>
 
                     <TableCell className="hidden md:table-cell">

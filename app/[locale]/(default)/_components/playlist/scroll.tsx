@@ -22,7 +22,11 @@ export default function ({
     if (!songs) {
       return;
     }
-    setPlaylist(songs);
+    setPlaylist(
+      songs.filter(
+        (item: Song) => item && item.audio_url && item.title && item.image_url
+      )
+    );
     setCurrentSong(song);
     setCurrentSongIndex(idx);
   };
@@ -37,7 +41,10 @@ export default function ({
         <ScrollArea className="w-96 md:w-full whitespace-nowrap mt-4">
           <div className="flex w-max space-x-4 p-4">
             {songs
-              .filter((item: Song) => item.title && item.image_url)
+              .filter(
+                (item: Song) =>
+                  item && item.audio_url && item.title && item.image_url
+              )
               .map((song: Song, idx: number) => {
                 const isActive = currentSong && currentSong.uuid === song.uuid;
                 return (
