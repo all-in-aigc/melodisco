@@ -465,9 +465,19 @@ export default function () {
                 />
               )}
               <div className="text-sm w-[120px] md:w-[1/3] mt-0.5 truncate">
-                <p className="font-medium truncate">{song.title}</p>
+                <p className="font-medium truncate">{song.title} </p>
+
                 <p className="">
                   {formatTime(currentTime)} / {formatTime(duration)}
+                  <span
+                    className={`badge ml-1 ${
+                      song.provider === "udio"
+                        ? "bg-red-500 text-white"
+                        : "bg-primary"
+                    }`}
+                  >
+                    {song.provider}
+                  </span>
                 </p>
               </div>
             </div>

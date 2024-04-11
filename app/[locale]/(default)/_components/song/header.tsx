@@ -25,19 +25,28 @@ export default function ({ song }: { song: Song }) {
 
   return (
     <div className="flex items-center gap-x-8 border-b border-base-300 pb-8">
-      <Image
-        src={song.image_url}
-        alt={song.title}
-        width={160}
-        height={160}
-        className="hidden md:block rounded-lg"
-      />
+      {song.image_url && (
+        <Image
+          src={song.image_url}
+          alt={song.title}
+          width={160}
+          height={160}
+          className="hidden md:block rounded-lg"
+        />
+      )}
 
       <div className="flex flex-col gap-y-2 mr-8">
         <h1 className="text-xl font-medium">{song.title}</h1>
         <p className="text-md">{song.tags}</p>
         <p className="text-md">
           {moment(song.created_at).format("MMMM Do, YYYY")}
+          <span
+            className={`badge ml-1 ${
+              song.provider === "udio" ? "bg-red-500 text-white" : "bg-primary"
+            }`}
+          >
+            {song.provider}
+          </span>
         </p>
 
         <div className="mt-2 flex gap-x-2 md:gap-x-4 text-md text-base-content">

@@ -43,9 +43,7 @@ export default function ({
       return;
     }
     setPlaylist(
-      songs.filter(
-        (item: Song) => item && item.audio_url && item.title && item.image_url
-      )
+      songs.filter((item: Song) => item && item.audio_url && item.title)
     );
     setCurrentSong(song);
     setCurrentSongIndex(idx);
@@ -74,10 +72,7 @@ export default function ({
           </TableHeader>
           <TableBody>
             {songs
-              .filter(
-                (item: Song) =>
-                  item && item.audio_url && item.title && item.image_url
-              )
+              .filter((item: Song) => item && item.audio_url && item.title)
               .map((song: Song, idx: number) => {
                 const isActive = currentSong && currentSong.uuid === song.uuid;
                 return (
@@ -93,13 +88,15 @@ export default function ({
                     </TableCell>
 
                     <TableCell className="hidden sm:table-cell">
-                      <Image
-                        alt={song.title}
-                        className="aspect-square rounded-md object-cover"
-                        height="64"
-                        src={song.image_url}
-                        width="64"
-                      />
+                      {song.image_url && (
+                        <Image
+                          alt={song.title}
+                          className="aspect-square rounded-md object-cover"
+                          height="64"
+                          src={song.image_url}
+                          width="64"
+                        />
+                      )}
                     </TableCell>
                     <TableCell className="font-medium max-w-[120px] truncate">
                       <Link
