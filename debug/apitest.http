@@ -9,14 +9,6 @@ Content-Type: application/json
    
 }
 
-### get song info
-POST {{baseUri}}/get-song-info
-Content-Type: application/json
-
-{
-   "uuid": "79a869b2-82b5-4a26-b5f4-8ae076d2c9f0"
-}
-
 ### fetch trending songs
 POST {{baseUri}}/process/fetch-trending-songs
 Content-Type: application/json
@@ -35,6 +27,14 @@ Content-Type: application/json
    "page": 1,
    "page_size": 100,
    "provider": "udio"
+}
+
+### get song info
+POST {{baseUri}}/get-song-info
+Content-Type: application/json
+
+{
+   "uuid": "79a869b2-82b5-4a26-b5f4-8ae076d2c9f0"
 }
 
 ### get random songs

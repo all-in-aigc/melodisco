@@ -39,6 +39,7 @@ export default function ({
   };
 
   const updatePlaylist = function (song: Song, idx: number) {
+    console.log(song, idx, songs);
     if (!songs) {
       return;
     }
@@ -70,7 +71,10 @@ export default function ({
           </TableHeader>
           <TableBody>
             {songs
-              .filter((item: Song) => item.title && item.image_url)
+              .filter(
+                (item: Song) =>
+                  item && item.audio_url && item.title && item.image_url
+              )
               .map((song: Song, idx: number) => {
                 const isActive = currentSong && currentSong.uuid === song.uuid;
                 return (

@@ -145,7 +145,7 @@ export async function getTrendingSongs(
 
   const db = getDb();
   const res = await db.query(
-    `SELECT * FROM songs WHERE status = 'complete' AND audio_url != '' AND is_trending = true order by upvote_count desc, play_count desc limit $1 offset $2`,
+    `SELECT * FROM songs WHERE status = 'complete' AND audio_url != '' order by play_count desc, upvote_count desc limit $1 offset $2`,
     [limit, offset]
   );
   if (res.rowCount === 0) {

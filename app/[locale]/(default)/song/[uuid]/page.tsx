@@ -41,6 +41,7 @@ export async function generateMetadata({
 export default async function ({ params }: { params: { uuid: string } }) {
   const t = await getTranslations("nav");
   let song = await findByUuid(params.uuid);
+
   if (!song) {
     const data = await getSongInfo([params.uuid]);
     if (data && data.length > 0 && data[0]["status"] === "complete") {

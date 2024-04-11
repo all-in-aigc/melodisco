@@ -69,7 +69,7 @@ export default function () {
     if (isPlaying) {
       audio.pause();
     } else {
-      audio.play();
+      audioPlay(audio);
     }
     setIsPlaying(!isPlaying);
   };
@@ -214,7 +214,7 @@ export default function () {
         break;
       case "loop":
         if (audioRef.current) {
-          audioRef.current.play();
+          audioPlay(audioRef.current);
         }
         break;
       case "shuffle":
@@ -243,7 +243,7 @@ export default function () {
         break;
       case "loop":
         if (audioRef.current) {
-          audioRef.current.play();
+          audioPlay(audioRef.current);
         }
         break;
       case "shuffle":
@@ -257,6 +257,16 @@ export default function () {
       default:
         console.log(`Unsupported play mode: ${playMode}`);
     }
+  };
+
+  const audioPlay = (audio: HTMLAudioElement) => {
+    audio.play().catch((error) => {
+      if (error.name === "AbortError") {
+        console.log("Play() was interrupted");
+      } else {
+        console.error("Error occurred while playing the video:", error);
+      }
+    });
   };
 
   useEffect(() => {
@@ -380,7 +390,7 @@ export default function () {
 
     setIsPlaying(true);
     audio.src = song.audio_url;
-    audio.play();
+    audioPlay(audio);
 
     updatePlaySong(song.uuid);
 
@@ -397,7 +407,7 @@ export default function () {
       return;
     }
 
-    audio.play();
+    // audio.play();
   }, [audioRef.current]);
 
   useEffect(() => {}, []);
@@ -445,13 +455,15 @@ export default function () {
               className="flex items-center gap-x-2 cursor-pointer"
               onClick={() => router.push(`/song/${song.uuid}`)}
             >
-              <Image
-                src={song.image_url}
-                width={48}
-                height={48}
-                alt={song.title}
-                className="rounded-md"
-              />
+              {song.image_url && (
+                <Image
+                  src={song.image_url}
+                  width={48}
+                  height={48}
+                  alt={song.title}
+                  className="rounded-md"
+                />
+              )}
               <div className="text-sm w-[120px] md:w-[1/3] mt-0.5 truncate">
                 <p className="font-medium truncate">{song.title}</p>
                 <p className="">
