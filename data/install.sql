@@ -32,7 +32,10 @@ CREATE TABLE songs (
     created_at timestamptz,
     status VARCHAR(50),
     is_public BOOLEAN,
-    is_trending BOOLEAN
+    is_trending BOOLEAN,
+    provider VARCHAR(50),
+    artist VARCHAR(100),
+    prompt TEXT
 );
 
 CREATE TABLE favorite_songs (
@@ -57,4 +60,22 @@ CREATE TABLE upvote_songs (
     updated_at timestamptz,
     is_signin BOOLEAN,
     status VARCHAR(50)
+)
+
+CREATE TABLE song_tasks (
+    uuid VARCHAR(255) UNIQUE NOT NULL,
+    user_uuid VARCHAR(255) NOT NULL,
+    created_at timestamptz,
+    updated_at timestamptz,
+    status VARCHAR(50),
+    description TEXT,
+    title VARCHAR(255),
+    lyrics TEXT,
+    tags VARCHAR(255),
+    is_no_lyrics BOOLEAN,
+    lyrics_provider VARCHAR(50),
+    lyrics_uuid VARCHAR(50),
+    song_provider VARCHAR(50),
+    song_model VARCHAR(50),
+    song_uuids TEXT
 )

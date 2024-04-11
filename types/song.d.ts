@@ -18,6 +18,9 @@ export interface Song {
   is_public: boolean;
   is_trending: boolean;
   type: string;
+  provider?: string;
+  artist?: string;
+  prompt?: string;
 }
 
 export interface FavoriteSong {

@@ -112,7 +112,39 @@ export async function updateSongs(allSongs: Song[]) {
   };
 }
 
-export function formatSong(v: any, is_trending: boolean): Song {
+export function formatSong(
+  v: any,
+  is_trending: boolean,
+  provider?: string
+): Song {
+  if (provider === "udio") {
+    const song: Song = {
+      uuid: v["id"],
+      video_url: v["video_path"],
+      audio_url: v["song_path"],
+      image_url: v["image_path"],
+      image_large_url: v["image_path"],
+      llm_model: "udio-beta",
+      tags: v["tags"].join(","),
+      lyrics: v["lyrics"],
+      description: v["prompt"],
+      duration: v["duration"],
+      type: "",
+      user_uuid: v["user_id"],
+      title: v["title"],
+      play_count: v["plays"],
+      upvote_count: v["likes"],
+      created_at: v["created_at"],
+      status: v["finished"] ? "complete" : "",
+      is_public: v["published_at"] ? true : false,
+      is_trending: is_trending,
+      provider: provider,
+      artist: v["artist"],
+      prompt: v["optimized_prompt"],
+    };
+    return song;
+  }
+
   const song: Song = {
     uuid: v["id"],
     video_url: v["video_url"],
@@ -133,6 +165,7 @@ export function formatSong(v: any, is_trending: boolean): Song {
     status: v["status"],
     is_public: v["is_public"],
     is_trending: is_trending,
+    provider: provider,
   };
 
   return song;

@@ -43,7 +43,7 @@ export default async function ({ params }: { params: { uuid: string } }) {
   let song = await findByUuid(params.uuid);
   if (!song) {
     const data = await getSongInfo([params.uuid]);
-    if (data && data.length > 0) {
+    if (data && data.length > 0 && data[0]["status"] === "complete") {
       song = formatSong(data[0], false);
       if (song) {
         await insertRow(song);
@@ -51,8 +51,8 @@ export default async function ({ params }: { params: { uuid: string } }) {
     }
   }
 
-  if (song && song.status === "forbidden") {
-    return "403";
+  if (!song || song.status !== "complete") {
+    return "404";
   }
 
   const randomSongs = await getRandomSongs(1, 20);

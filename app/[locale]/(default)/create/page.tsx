@@ -51,7 +51,8 @@ export default async function () {
         </div>
       </div>
 
-      <Generator />
+      {/* <Generator /> */}
+      <div>coming soon...</div>
     </div>
   );
 }

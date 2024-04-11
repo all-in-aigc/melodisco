@@ -7,9 +7,9 @@ export async function insertRow(song: Song) {
   const db = getDb();
   const res = await db.query(
     `INSERT INTO songs 
-  (uuid, video_url, audio_url, image_url, image_large_url, llm_model, tags, lyrics, description, duration, type, user_uuid, title, play_count, upvote_count, created_at, status, is_public, is_trending) 
+  (uuid, video_url, audio_url, image_url, image_large_url, llm_model, tags, lyrics, description, duration, type, user_uuid, title, play_count, upvote_count, created_at, status, is_public, is_trending, provider, artist, prompt) 
   VALUES 
-  ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
+  ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
 `,
     [
       song.uuid,
@@ -31,6 +31,9 @@ export async function insertRow(song: Song) {
       song.status,
       song.is_public,
       song.is_trending,
+      song.provider,
+      song.artist,
+      song.prompt,
     ]
   );
 
@@ -94,7 +97,7 @@ export async function getLatestSongs(
 
   const db = getDb();
   const res = await db.query(
-    `SELECT * FROM songs WHERE status = 'complete' order by created_at desc limit $1 offset $2`,
+    `SELECT * FROM songs WHERE status = 'complete' AND audio_url != '' order by created_at desc limit $1 offset $2`,
     [limit, offset]
   );
   if (res.rowCount === 0) {
@@ -118,7 +121,7 @@ export async function getRandomSongs(
 
   const db = getDb();
   const res = await db.query(
-    `SELECT * FROM songs WHERE status = 'complete' order by random() limit $1 offset $2`,
+    `SELECT * FROM songs WHERE status = 'complete' AND audio_url != '' order by random() limit $1 offset $2`,
     [limit, offset]
   );
   if (res.rowCount === 0) {
@@ -142,7 +145,7 @@ export async function getTrendingSongs(
 
   const db = getDb();
   const res = await db.query(
-    `SELECT * FROM songs WHERE status = 'complete' AND is_trending = true order by upvote_count desc, play_count desc limit $1 offset $2`,
+    `SELECT * FROM songs WHERE status = 'complete' AND audio_url != '' AND is_trending = true order by upvote_count desc, play_count desc limit $1 offset $2`,
     [limit, offset]
   );
   if (res.rowCount === 0) {
@@ -250,6 +253,9 @@ export function formatSong(row: QueryResultRow): Song | undefined {
     status: row.status,
     is_public: row.is_public,
     is_trending: row.is_trending,
+    provider: row.provider,
+    artist: row.artist,
+    prompt: row.prompt,
   };
 
   if (isSongSensitive(song)) {

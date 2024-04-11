@@ -39,6 +39,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn1.suno.ai",
       },
+      {
+        protocol: "https",
+        hostname: "imagedelivery.net",
+      },
     ],
   },
 };

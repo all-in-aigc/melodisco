@@ -5,6 +5,7 @@ import { cacheGet, cacheSet } from "@/utils/cache";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { Song } from "@/types/song";
+import { SongTask } from "@/types/task";
 import { User } from "@/types/user";
 import { getTimestamp } from "@/utils/time";
 import useOneTapLogin from "@/hooks/useOneTapLogin";
@@ -24,6 +25,8 @@ export const AppContextProvider = ({ children }: ContextProviderProps) => {
   const [playlist, setPlaylist] = useState<Song[]>([]);
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [songTask, setSongTask] = useState<SongTask | null>(null);
+  const [songTaskStep, setSongTaskStep] = useState(1);
 
   const appendPlaylist = (newSong: Song) => {
     console.log("add newsong", newSong);
@@ -101,6 +104,10 @@ export const AppContextProvider = ({ children }: ContextProviderProps) => {
         setCurrentSong,
         currentSongIndex,
         setCurrentSongIndex,
+        songTask,
+        setSongTask,
+        songTaskStep,
+        setSongTaskStep,
       }}
     >
       {children}

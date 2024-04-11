@@ -13,10 +13,10 @@ export default function ({ navs }: { navs: Nav[] }) {
   return (
     <Breadcrumb className="mb-8 text-base-content">
       <BreadcrumbList>
-        {navs.map((nav: Nav) => {
+        {navs.map((nav: Nav, idx: number) => {
           return (
             <>
-              <BreadcrumbItem className="cursor-pointer">
+              <BreadcrumbItem className="cursor-pointer" key={idx}>
                 {nav.active ? (
                   <BreadcrumbPage className="text-primary">
                     {nav.title}

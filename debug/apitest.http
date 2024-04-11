@@ -9,12 +9,12 @@ Content-Type: application/json
    
 }
 
-### fetch song
-POST {{baseUri}}/process/fetch-song
+### get song info
+POST {{baseUri}}/get-song-info
 Content-Type: application/json
 
 {
-   "uuid": "f81be5c0-3de9-4940-95e1-cfb780d3aa5e"
+   "uuid": "79a869b2-82b5-4a26-b5f4-8ae076d2c9f0"
 }
 
 ### fetch trending songs
@@ -22,7 +22,9 @@ POST {{baseUri}}/process/fetch-trending-songs
 Content-Type: application/json
 
 {
-   "page": 1
+   "page": 1,
+   "page_size": 100,
+   "provider": "udio"
 }
 
 ### fetch latest songs
@@ -30,7 +32,9 @@ POST {{baseUri}}/process/fetch-latest-songs
 Content-Type: application/json
 
 {
-   "page": 1
+   "page": 1,
+   "page_size": 100,
+   "provider": "udio"
 }
 
 ### get random songs
@@ -42,6 +46,13 @@ Content-Type: application/json
    "limit": 3
 }
 
+### gen song lyrics
+POST {{baseUri}}/gen-song-lyrics
+Content-Type: application/json
+
+{
+    "description": "写一首关于旅行的歌"
+}
 
 ### gen music
 POST {{baseUri}}/gen-song
@@ -49,7 +60,7 @@ Content-Type: application/json
 
 {
     "description": "a hip-pop song about a beautiful lady.",
-    "style": "hip-pop",
+    "style": "hip-pop1",
     "lyric": "",
     "title": "" 
 }

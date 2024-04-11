@@ -2,16 +2,21 @@ const apiBaseUri = "https://studio-api.suno.ai";
 
 export async function genSong(
   description: string,
-  is_no_lyric: boolean = false
+  title?: string,
+  lyrics?: string,
+  is_no_lyrics?: boolean,
+  tags?: string
 ) {
   try {
     const uri = `${apiBaseUri}/api/generate/v2/`;
     const headers = await getReqHeaders();
     const params = {
       gpt_description_prompt: description,
+      title: title,
+      prompt: lyrics,
+      make_instrumental: is_no_lyrics,
+      tags: tags,
       mv: "chirp-v3-0",
-      prompt: "",
-      make_instrumental: is_no_lyric,
     };
 
     const resp = await fetch(uri, {
@@ -24,6 +29,45 @@ export async function genSong(
     return data;
   } catch (e) {
     console.log("gen music failed: ", e);
+  }
+}
+
+export async function genLyrics(description: string) {
+  try {
+    const uri = `${apiBaseUri}/api/generate/lyrics/`;
+    const headers = await getReqHeaders();
+    const params = {
+      prompt: description,
+    };
+
+    const resp = await fetch(uri, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(params),
+    });
+    const data = await resp.json();
+
+    return data;
+  } catch (e) {
+    console.log("gen lyrics failed: ", e);
+  }
+}
+
+export async function getLyrics(taskid: string) {
+  try {
+    const uri = `${apiBaseUri}/api/generate/lyrics/${taskid}`;
+    console.log("uri", uri);
+    const headers = await getReqHeaders();
+
+    const resp = await fetch(uri, {
+      headers: headers,
+    });
+    const data = await resp.json();
+
+    return data;
+  } catch (e) {
+    console.log("get lyrics failed:", e);
+    return [];
   }
 }
 
@@ -107,13 +151,13 @@ export async function getJwtToken() {
   try {
     const sessionId = process.env.SUNO_SESSION_ID;
 
-    const uri = `https://clerk.suno.ai/v1/client/sessions/${sessionId}/tokens?_clerk_js_version=4.70.5`;
+    const uri = `https://clerk.suno.com/v1/client/sessions/${sessionId}/tokens?_clerk_js_version=4.70.5`;
 
     const headers: any = {
       cookie: process.env.SUNO_COOKIE,
       "user-agent": process.env.SUNO_UA,
-      origin: "https://app.suno.ai",
-      referer: "https://app.suno.ai/",
+      origin: "https://suno.com",
+      referer: "https://suno.com/",
     };
 
     const resp = await fetch(uri, {
@@ -143,8 +187,8 @@ async function getReqHeaders(): Promise<any> {
 
   const headers = {
     "user-agent": userAgent,
-    origin: "https://app.suno.ai",
-    referer: "https://app.suno.ai/",
+    origin: "https://suno.com",
+    referer: "https://suno.com/",
     authorization: `Bearer ${token}`,
   };
 

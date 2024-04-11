@@ -3,21 +3,33 @@ import { respData, respErr } from "@/utils/resp";
 
 import { Song } from "@/types/song";
 import { getTrendingSongs } from "@/services/suno";
+import { getTrendingSongs as getUdioTrendingSongs } from "@/services/udio";
 
 export const maxDuration = 120;
 
 export async function POST(req: Request) {
   try {
-    const { page } = await req.json();
+    const { page, page_size, provider } = await req.json();
 
     let songs: Song[] = [];
 
-    const data = await getTrendingSongs(page);
-    if (data && data["playlist_clips"]) {
-      data["playlist_clips"].forEach((item: any) => {
-        const song = formatSong(item["clip"], true);
-        songs.push(song);
-      });
+    if (provider === "udio") {
+      const data = await getUdioTrendingSongs(page, page_size);
+      console.log("data", data);
+      if (data && data["data"]) {
+        data["data"].forEach((item: any) => {
+          const song = formatSong(item, true, provider);
+          songs.push(song);
+        });
+      }
+    } else {
+      const data = await getTrendingSongs(page);
+      if (data && data["playlist_clips"]) {
+        data["playlist_clips"].forEach((item: any) => {
+          const song = formatSong(item["clip"], true, "suno");
+          songs.push(song);
+        });
+      }
     }
 
     if (songs.length === 0) {

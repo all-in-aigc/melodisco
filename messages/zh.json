@@ -39,10 +39,32 @@
     "create": "创建音乐"
   },
   "song": {
-    "title": "标题",
-    "tags": "标签",
+    "title": "歌名",
+    "tags": "风格",
     "duration": "时长",
     "lyrics": "歌词",
     "play": "播放"
+  },
+  "create": {
+    "steps": {
+      "describe": "描述歌曲",
+      "info": "创建歌曲",
+      "result": "预览歌曲"
+    },
+    "form": {
+      "description": "歌曲描述",
+      "description_placeholder": "描述你想生成的歌曲",
+      "title": "歌名",
+      "title_placeholder": "请输入歌名",
+      "lyrics": "歌词",
+      "lyrics_placeholder": "请输入歌词",
+      "tags": "歌曲风格",
+      "tags_placeholder": "请输入歌曲风格",
+      "nolyrics": "无歌词",
+      "model": "模型",
+      "genlyrics": "生成歌词",
+      "gensong": "生成歌曲",
+      "preview": "预览歌曲"
+    }
   }
 }
