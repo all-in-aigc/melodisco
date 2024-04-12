@@ -36,13 +36,13 @@ export default function () {
       title: t("trending"),
       url: "/trending",
       icon: <MdLocalFireDepartment className="text-lg" />,
-      active: pathname.endsWith("trending"),
+      active: pathname.includes("trending"),
     },
     {
       title: t("newest"),
       url: "/newest",
       icon: <MdOutlineRssFeed className="text-lg" />,
-      active: pathname.endsWith("newest"),
+      active: pathname.includes("newest"),
     },
     {
       title: t("roaming"),

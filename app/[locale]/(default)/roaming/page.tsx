@@ -2,6 +2,7 @@ import Crumb from "../_components/crumb";
 import { Metadata } from "next";
 import { Nav } from "@/types/nav";
 import Playlist from "../_components/playlist";
+import Tab from "../_components/tab";
 import { getRandomSongs } from "@/models/song";
 import { getTranslations } from "next-intl/server";
 
@@ -51,6 +52,7 @@ export default async function () {
             {t("roaming")}
           </h1>
           <p className="text-sm text-muted-foreground"></p>
+          <Tab type="roaming" />
         </div>
       </div>
 

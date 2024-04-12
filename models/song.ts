@@ -107,6 +107,31 @@ export async function getLatestSongs(
   return getSongsFromSqlResult(res);
 }
 
+export async function getProviderLatestSongs(
+  provider: string,
+  page: number,
+  limit: number
+): Promise<Song[] | undefined> {
+  if (page <= 0) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM songs WHERE provider = $1 AND status = 'complete' AND audio_url != '' order by created_at desc limit $2 offset $3`,
+    [provider as any, limit, offset]
+  );
+  if (res.rowCount === 0) {
+    return undefined;
+  }
+
+  return getSongsFromSqlResult(res);
+}
+
 export async function getRandomSongs(
   page: number,
   limit: number
@@ -131,6 +156,31 @@ export async function getRandomSongs(
   return getSongsFromSqlResult(res);
 }
 
+export async function getProviderRandomSongs(
+  provider: string,
+  page: number,
+  limit: number
+): Promise<Song[] | undefined> {
+  if (page <= 0) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM songs WHERE provider = $1 AND status = 'complete' AND audio_url != '' order by random() limit $2 offset $3`,
+    [provider as any, limit, offset]
+  );
+  if (res.rowCount === 0) {
+    return undefined;
+  }
+
+  return getSongsFromSqlResult(res);
+}
+
 export async function getTrendingSongs(
   page: number,
   limit: number
@@ -147,6 +197,31 @@ export async function getTrendingSongs(
   const res = await db.query(
     `SELECT * FROM songs WHERE status = 'complete' AND audio_url != '' order by play_count desc, upvote_count desc limit $1 offset $2`,
     [limit, offset]
+  );
+  if (res.rowCount === 0) {
+    return undefined;
+  }
+
+  return getSongsFromSqlResult(res);
+}
+
+export async function getProviderTrendingSongs(
+  provider: string,
+  page: number,
+  limit: number
+): Promise<Song[] | undefined> {
+  if (page <= 0) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM songs WHERE provider = $1 AND status = 'complete' AND audio_url != '' order by play_count desc, upvote_count desc limit $2 offset $3`,
+    [provider as any, limit, offset]
   );
   if (res.rowCount === 0) {
     return undefined;
@@ -257,6 +332,11 @@ export function formatSong(row: QueryResultRow): Song | undefined {
     artist: row.artist,
     prompt: row.prompt,
   };
+
+  if (!song.image_url) {
+    song.image_url = "/cover.png";
+    song.image_large_url = "/cover.png";
+  }
 
   if (isSongSensitive(song)) {
     song.status = "forbidden";

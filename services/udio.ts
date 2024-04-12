@@ -8,6 +8,26 @@ export async function getLatestSongs(page: number, page_size: number) {
   return getSongs(page, page_size, "created_at");
 }
 
+export async function getSongInfo(ids: string[]) {
+  try {
+    const uri = `${apiBaseUri}/api/songs?songIds=${encodeURIComponent(
+      ids.join(",")
+    )}`;
+    const headers = await getReqHeaders();
+
+    const resp = await fetch(uri, {
+      headers: headers,
+    });
+
+    console.log("res", headers, resp);
+    const data = await resp.json();
+
+    return data;
+  } catch (e) {
+    console.log("get song info failed: ", e);
+  }
+}
+
 async function getSongs(page: number, page_size: number, sort: string) {
   if (!page) {
     page = 1;
