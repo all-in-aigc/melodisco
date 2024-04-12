@@ -6,7 +6,7 @@ export default function ({ type }: { type: string }) {
   const pathname = usePathname();
 
   return (
-    <div role="tablist" className="tabs tabs-boxed mt-2">
+    <div role="tablist" className="tabs tabs-sm md:tabs-md tabs-boxed mt-2">
       <a
         href={`/${type}`}
         className={`tab ${

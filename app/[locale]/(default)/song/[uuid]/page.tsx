@@ -25,6 +25,9 @@ export async function generateMetadata({
   if (song) {
     title = t("song_title").replace("%s", song.title);
     description = t("song_description").replace("%s", song.title);
+    if (song.provider === "udio") {
+      description = description.replace("Suno", "Udio");
+    }
   }
 
   return {
