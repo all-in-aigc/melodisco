@@ -28,7 +28,7 @@ export default function ({ song }: { song: Song }) {
       {song.image_url && (
         <Image
           src={song.image_url}
-          alt={song.title}
+          alt={song.title || ""}
           width={160}
           height={160}
           className="hidden md:block rounded-lg"
@@ -36,7 +36,7 @@ export default function ({ song }: { song: Song }) {
       )}
 
       <div className="flex flex-col gap-y-2 mr-8">
-        <h1 className="text-xl font-medium">{song.title}</h1>
+        <h1 className="text-xl font-medium">{song.title || "No Title"}</h1>
         <p className="text-md">{song.tags}</p>
         <p className="text-md">
           {moment(song.created_at).format("MMMM Do, YYYY")}

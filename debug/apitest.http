@@ -9,6 +9,15 @@ Content-Type: application/json
    
 }
 
+
+### fetch songs
+POST {{baseUri}}/fetch-songs
+Content-Type: application/json
+
+{
+   "uuids": ["ca534ba7-df13-468d-9148-185e741458db","2eb8fbb2-b870-44fd-9f6b-68d663129c42","d78cfc42-d204-4181-a35a-489fc0af4ee1"]
+}
+
 ### fetch trending songs
 POST {{baseUri}}/process/fetch-trending-songs
 Content-Type: application/json

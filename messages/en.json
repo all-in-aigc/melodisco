@@ -38,7 +38,8 @@
     "favorites": "Favorites",
     "recently": "Recently",
     "tools": "Tools",
-    "create": "Create Music"
+    "create": "Create Music",
+    "creations": "Creations"
   },
   "song": {
     "title": "Title",
@@ -47,26 +48,9 @@
     "lyrics": "Lyrics",
     "play": "Play"
   },
-  "create": {
-    "steps": {
-      "describe": "Describe Song",
-      "info": "Generate Song",
-      "result": "Preview Song"
-    },
-    "form": {
-      "description": "Song Description",
-      "description_placeholder": "Describe what kind of song you want to create.",
-      "title": "Song Title",
-      "title_placeholder": "Enter Song Title",
-      "lyrics": "Lyrics",
-      "lyrics_placeholder": "Enter song lyrics",
-      "tags": "Style of Music",
-      "tags_placeholder": "Enter style of music",
-      "nolyrics": "No Lyrics",
-      "model": "Model",
-      "genlyrics": "Generate Lyrics",
-      "gensong": "Generate Song",
-      "preview": "Priew Song"
-    }
+  "pricing": {
+    "title": "Pricing",
+    "tip": "Choose a plan to buy credits, Unleash your creativity with AI Music.",
+    "credits": "Credits"
   }
 }

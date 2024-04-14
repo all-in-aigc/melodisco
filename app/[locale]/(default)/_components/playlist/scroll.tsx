@@ -55,8 +55,8 @@ export default function ({
                   >
                     <div className="overflow-hidden rounded-md relative">
                       <Image
-                        src={song.image_url}
-                        alt={song.title}
+                        src={song.image_url || "/cover.png"}
+                        alt={song.title || ""}
                         className={`h-fit w-fit object-cover ${
                           isActive ? "opacity-[0.3]" : ""
                         }`}

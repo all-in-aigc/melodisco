@@ -1,12 +1,12 @@
 "use client";
 
 import { ContextProviderProps, ContextProviderValue } from "@/types/context";
+import { User, UserCredits } from "@/types/user";
 import { cacheGet, cacheSet } from "@/utils/cache";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { Song } from "@/types/song";
 import { SongTask } from "@/types/task";
-import { User } from "@/types/user";
 import { getTimestamp } from "@/utils/time";
 import useOneTapLogin from "@/hooks/useOneTapLogin";
 
@@ -22,6 +22,7 @@ export const AppContextProvider = ({ children }: ContextProviderProps) => {
   const [isSiderOpen, setIsSiderOpen] = useState(false);
   const [isShowSignPanel, setIsShowSignPanel] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [userCredits, setUserCredits] = useState<UserCredits | null>(null);
   const [playlist, setPlaylist] = useState<Song[]>([]);
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -97,6 +98,8 @@ export const AppContextProvider = ({ children }: ContextProviderProps) => {
         setIsShowSignPanel,
         user,
         setUser,
+        userCredits,
+        setUserCredits,
         playlist,
         setPlaylist,
         appendPlaylist,

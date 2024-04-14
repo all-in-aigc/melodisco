@@ -1,6 +1,9 @@
+import { genUniSeq, genUuid } from "@/utils";
+
 const apiBaseUri = "https://studio-api.suno.ai";
 
 export async function genSong(
+  task_uuid: string,
   description: string,
   title?: string,
   lyrics?: string,
@@ -8,6 +11,17 @@ export async function genSong(
   tags?: string
 ) {
   try {
+    if (process.env.SUNOAPI_ENABLE === "true") {
+      return genSongWithSunoApi(
+        task_uuid,
+        description,
+        title,
+        lyrics,
+        is_no_lyrics,
+        tags
+      );
+    }
+
     const uri = `${apiBaseUri}/api/generate/v2/`;
     const headers = await getReqHeaders();
     const params = {
@@ -19,6 +33,8 @@ export async function genSong(
       mv: "chirp-v3-0",
     };
 
+    console.log("gen song params", params);
+
     const resp = await fetch(uri, {
       method: "POST",
       headers: headers,
@@ -29,6 +45,68 @@ export async function genSong(
     return data;
   } catch (e) {
     console.log("gen music failed: ", e);
+  }
+}
+
+export async function genSongWithSunoApi(
+  task_uuid: string,
+  description: string,
+  title?: string,
+  lyrics?: string,
+  is_no_lyrics?: boolean,
+  tags?: string
+) {
+  try {
+    const callbackUrl = `${process.env.SUNOAPI_CALLBACK_BASE_URL}/api/gen-song-callback?taskid=${task_uuid}`;
+    const uri = `${process.env.SUNOAPI_BASE_URL}/api/v1/generate`;
+    let params = null;
+    if (lyrics) {
+      params = {
+        customMode: true,
+        instrumental: is_no_lyrics,
+        title: title,
+        prompt: lyrics,
+        style: tags,
+        callBackUrl: callbackUrl,
+      };
+    } else {
+      params = {
+        customMode: false,
+        instrumental: is_no_lyrics,
+        prompt: description,
+        callBackUrl: callbackUrl,
+      };
+    }
+
+    const resp = await fetch(uri, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.SUNOAPI_API_KEY}`,
+      },
+      body: JSON.stringify(params),
+    });
+    const { code, msg, data } = await resp.json();
+    console.log("gen song with sunoapi:", code, msg, data);
+    if (code !== 200) {
+      console.log("gen song failed:", msg);
+      return;
+    }
+    const uuid1 = genUniSeq();
+    const uuid2 = genUniSeq();
+
+    return {
+      clips: [
+        {
+          id: `SUNOAPI_${uuid1}`,
+        },
+        {
+          id: `SUNOAPI_${uuid2}`,
+        },
+      ],
+    };
+  } catch (e) {
+    console.log("gen song with suno api failed:", e);
   }
 }
 

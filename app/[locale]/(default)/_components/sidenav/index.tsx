@@ -8,6 +8,7 @@ import {
   MdOutlinePlayCircleOutline,
   MdOutlineRadio,
   MdOutlineRssFeed,
+  MdOutlineWorkspacePremium,
 } from "react-icons/md";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
@@ -58,6 +59,27 @@ export default function () {
     },
   ];
 
+  const libraryNavs: Nav[] = [
+    {
+      title: t("favorites"),
+      url: "/favorites",
+      icon: <MdOutlineFavorite className="text-lg" />,
+      active: pathname.endsWith("favorites"),
+    },
+    {
+      title: t("recently"),
+      url: "/recently",
+      icon: <MdOutlinePlayCircleOutline className="text-lg" />,
+      active: pathname.endsWith("recently"),
+    },
+    {
+      title: t("creations"),
+      url: "/creations",
+      icon: <MdOutlineWorkspacePremium className="text-lg" />,
+      active: pathname.endsWith("creations"),
+    },
+  ];
+
   const toolsNavs: Nav[] = [
     {
       title: t("create"),
@@ -76,21 +98,6 @@ export default function () {
 
     return nav.url;
   };
-
-  const libraryNavs: Nav[] = [
-    {
-      title: t("favorites"),
-      url: "/favorites",
-      icon: <MdOutlineFavorite className="text-lg" />,
-      active: pathname.endsWith("favorites"),
-    },
-    {
-      title: t("recently"),
-      url: "/recently",
-      icon: <MdOutlinePlayCircleOutline className="text-lg" />,
-      active: pathname.endsWith("recently"),
-    },
-  ];
 
   const Navs = (navs: Nav[]) => {
     return (

@@ -36,7 +36,8 @@
     "favorites": "お気に入り",
     "recently": "最近",
     "tools": "ツール",
-    "create": "音楽を作成"
+    "create": "音楽を作成",
+    "creations": "創造"
   },
   "song": {
     "title": "タイトル",
@@ -44,5 +45,10 @@
     "duration": "再生時間",
     "lyrics": "歌詞",
     "play": "再生"
+  },
+  "pricing": {
+    "title": "価格設定",
+    "tip": "クレジットを購入するプランを選択し、AI音楽で創造力を解放してください。",
+    "credits": "クレジット"
   }
 }

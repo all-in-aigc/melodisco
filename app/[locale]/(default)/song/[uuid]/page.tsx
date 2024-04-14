@@ -1,4 +1,9 @@
-import { findByUuid, getRandomSongs, insertRow } from "@/models/song";
+import {
+  findByUuid,
+  getRandomSongs,
+  insertRow,
+  updateSong,
+} from "@/models/song";
 
 import Crumb from "../../_components/crumb";
 import Header from "../../_components/song/header";
@@ -23,8 +28,8 @@ export async function generateMetadata({
   let description = "";
   let song = await findByUuid(params.uuid);
   if (song) {
-    title = t("song_title").replace("%s", song.title);
-    description = t("song_description").replace("%s", song.title);
+    title = t("song_title").replace("%s", song.title || "");
+    description = t("song_description").replace("%s", song.title || "");
     if (song.provider === "udio") {
       description = description.replace("Suno", "Udio");
     }
@@ -47,16 +52,34 @@ export default async function ({ params }: { params: { uuid: string } }) {
 
   if (!song) {
     const data = await getSongInfo([params.uuid]);
-    if (data && data.length > 0 && data[0]["status"] === "complete") {
+    if (data && data.length > 0) {
       song = formatSong(data[0], false);
       if (song) {
+        song.provider = "suno";
         await insertRow(song);
+      }
+    }
+  } else if (song.status === "create") {
+    const data = await getSongInfo([params.uuid]);
+    if (data && data.length > 0) {
+      song = formatSong(data[0], false);
+      if (song) {
+        song.provider = "suno";
+        await updateSong(song);
       }
     }
   }
 
-  if (!song || song.status !== "complete") {
+  if (!song) {
     return "404";
+  } else if (song.status === "create") {
+    return "song creating...";
+  } else if (song.status === "forbidden") {
+    return "403";
+  } else {
+    if (song.status !== "complete") {
+      return song.status;
+    }
   }
 
   const randomSongs = await getRandomSongs(1, 20);

@@ -11,11 +11,11 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
-  const t = await getTranslations("metadata");
+  const t = await getTranslations("");
 
   return {
-    title: t("create_title"),
-    description: t("create_description"),
+    title: `${t("nav.create")} | ${t("metadata.title")}`,
+    description: `${t("nav.create")} | ${t("metadata.description")}`,
     alternates: {
       canonical: `${process.env.NEXTAUTH_URL}/${
         params.locale !== "en" ? params.locale + "/" : ""
@@ -51,8 +51,7 @@ export default async function () {
         </div>
       </div>
 
-      {/* <Generator /> */}
-      <div>coming soon...</div>
+      <Generator />
     </div>
   );
 }

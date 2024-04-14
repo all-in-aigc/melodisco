@@ -36,7 +36,8 @@
     "favorites": "Favoriten",
     "recently": "Kürzlich gespielt",
     "tools": "Werkzeuge",
-    "create": "Musik erstellen"
+    "create": "Musik erstellen",
+    "creations": "Kreationen"
   },
   "song": {
     "title": "Titel",
@@ -44,5 +45,10 @@
     "duration": "Dauer",
     "lyrics": "Lyrics",
     "play": "Abspielen"
+  },
+  "pricing": {
+    "title": "Preise",
+    "tip": "Wählen Sie einen Plan zum Kauf von Credits, Entfesseln Sie Ihre Kreativität mit AI-Musik.",
+    "credits": "Credits"
   }
 }

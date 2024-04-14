@@ -39,12 +39,10 @@ export default function ({
   };
 
   const updatePlaylist = function (song: Song, idx: number) {
-    if (!songs) {
+    if (!songs || !song || !song.audio_url) {
       return;
     }
-    setPlaylist(
-      songs.filter((item: Song) => item && item.audio_url && item.title)
-    );
+    setPlaylist(songs.filter((item: Song) => item));
     setCurrentSong(song);
     setCurrentSongIndex(idx);
   };
@@ -72,9 +70,11 @@ export default function ({
           </TableHeader>
           <TableBody>
             {songs
-              .filter((item: Song) => item && item.audio_url && item.title)
+              .filter((item: Song) => item)
               .map((song: Song, idx: number) => {
                 const isActive = currentSong && currentSong.uuid === song.uuid;
+                const isFinished = song.status === "complete";
+
                 return (
                   <TableRow
                     key={idx}
@@ -88,9 +88,9 @@ export default function ({
                     </TableCell>
 
                     <TableCell className="hidden sm:table-cell">
-                      {song.image_url && (
+                      {isFinished && song.image_url && (
                         <Image
-                          alt={song.title}
+                          alt={song.title || ""}
                           className="aspect-square rounded-md object-cover"
                           height="64"
                           src={song.image_url}
@@ -106,18 +106,24 @@ export default function ({
                           e.stopPropagation();
                         }}
                       >
-                        {song.title}
+                        {song.title || "No Title"}
                       </Link>
-                      <div className="flex items-center gap-x-4 mt-1">
-                        <div className="flex items-center gap-x-0.5">
-                          <MdHeadset />
-                          {song.play_count}
+                      {isFinished ? (
+                        <div className="flex items-center gap-x-4 mt-1">
+                          <div className="flex items-center gap-x-0.5">
+                            <MdHeadset />
+                            {song.play_count}
+                          </div>
+                          <div className="flex items-center gap-x-0.5">
+                            <MdOutlineThumbUp />
+                            {song.upvote_count}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-x-0.5">
-                          <MdOutlineThumbUp />
-                          {song.upvote_count}
+                      ) : (
+                        <div className="flex items-center gap-x-4 mt-1">
+                          <span className="text-primary">creating...</span>
                         </div>
-                      </div>
+                      )}
                     </TableCell>
 
                     <TableCell className="font-medium max-w-[120px] md:max-w-sm truncate">
@@ -129,12 +135,12 @@ export default function ({
                             : "bg-primary"
                         }`}
                       >
-                        {song.provider}
+                        {song.provider || "suno"}
                       </div>
                     </TableCell>
 
                     <TableCell className="hidden md:table-cell">
-                      {formatTime(song.duration)}
+                      {formatTime(song.duration || 0.0)}
                     </TableCell>
                   </TableRow>
                 );

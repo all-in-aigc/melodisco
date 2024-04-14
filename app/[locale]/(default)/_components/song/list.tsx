@@ -33,10 +33,10 @@ export default function ({ songs }: { songs: Song[] }) {
               onClick={() => playSong(song)}
             >
               <Image
-                src={song.image_url}
+                src={song.image_url || "/cover.png"}
                 width={60}
                 height={60}
-                alt={song.title}
+                alt={song.title || ""}
                 className={`rounded-md h-fit w-fit object-cover ${
                   isActive ? "opacity-[0.3]" : ""
                 }`}

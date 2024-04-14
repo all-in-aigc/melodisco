@@ -8,6 +8,7 @@ import {
 } from "react-icons/bs";
 
 import { FaProductHunt } from "react-icons/fa";
+import { MdOutlineMail } from "react-icons/md";
 import { SiBuymeacoffee } from "react-icons/si";
 
 export default function () {
@@ -29,14 +30,7 @@ export default function () {
       >
         <FaProductHunt className="text-xl" />
       </a>
-      {/* <a
-        href="https://github.com/thinkany-ai/thinkany/issues"
-        target="_blank"
-        rel="nofollow"
-        className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
-      >
-        <BsGithub className="text-lg" />
-      </a> */}
+
       {/* <a
         href="https://discord.gg/kfbbRha3"
         target="_blank"
@@ -76,6 +70,14 @@ export default function () {
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
       >
         <SiBuymeacoffee className="text-lg" />
+      </a>
+      <a
+        href="mailto:support@thinkany.ai"
+        target="_blank"
+        rel="nofollow"
+        className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
+      >
+        <MdOutlineMail className="text-xl" />
       </a>
     </div>
   );

@@ -40,6 +40,61 @@ export async function insertRow(song: Song) {
   return res;
 }
 
+export async function updateSong(song: Song) {
+  const db = getDb();
+  const res = await db.query(
+    `UPDATE songs SET 
+    video_url = $1,
+    audio_url = $2,
+    image_url = $3,
+    image_large_url = $4,
+    llm_model = $5,
+    tags = $6,
+    lyrics = $7,
+    description = $8,
+    duration = $9,
+    type = $10,
+    user_uuid = $11,
+    title = $12,
+    play_count = $13,
+    upvote_count = $14,
+    created_at = $15,
+    status = $16,
+    is_public = $17,
+    is_trending = $18,
+    provider = $19,
+    artist = $20,
+    prompt = $21 WHERE uuid = $22
+`,
+    [
+      song.video_url,
+      song.audio_url,
+      song.image_url,
+      song.image_large_url,
+      song.llm_model,
+      song.tags,
+      song.lyrics,
+      song.description,
+      song.duration as any,
+      song.type,
+      song.user_uuid,
+      song.title,
+      song.play_count,
+      song.upvote_count,
+      song.created_at,
+      song.status,
+      song.is_public,
+      song.is_trending,
+      song.provider,
+      song.artist,
+      song.prompt,
+      song.uuid,
+    ]
+  );
+
+  return res;
+}
+
 export async function getUuids(): Promise<string[]> {
   const db = getDb();
   const res = await db.query(`SELECT uuid FROM songs`);
@@ -267,7 +322,7 @@ export function getSongsFromSqlResult(
   const { rows } = res;
   rows.forEach((row) => {
     const song = formatSong(row);
-    if (song && song.status === "complete") {
+    if (song && song.status !== "forbidden") {
       songs.push(song);
     }
   });

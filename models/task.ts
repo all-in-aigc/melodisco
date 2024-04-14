@@ -1,6 +1,9 @@
-import { QueryResultRow } from "pg";
+import { QueryResult, QueryResultRow } from "pg";
+
+import { Song } from "@/types/song";
 import { SongTask } from "@/types/task";
 import { getDb } from "@/models/db";
+import { getSongsFromSqlResult } from "./song";
 
 export async function insertSongTask(task: SongTask) {
   const db = await getDb();
@@ -30,6 +33,24 @@ export async function insertSongTask(task: SongTask) {
   );
 
   return res;
+}
+
+export async function getUserSongTasksCount(
+  user_uuid: string
+): Promise<number> {
+  const db = getDb();
+  const res = await db.query(
+    `SELECT count(1) as count FROM song_tasks WHERE user_uuid = $1`,
+    [user_uuid]
+  );
+  if (res.rowCount === 0) {
+    return 0;
+  }
+
+  const { rows } = res;
+  const row = rows[0];
+
+  return row.count;
 }
 
 export async function updateSongTask(task: SongTask) {
@@ -81,6 +102,98 @@ export async function findSongTaskByUuid(
   const { rows } = res;
 
   return formatSongTask(rows[0]);
+}
+
+export async function getUserSongTasks(
+  user_uuid: string,
+  page: number,
+  limit: number
+): Promise<SongTask[] | undefined> {
+  if (page <= 0) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM song_tasks WHERE user_uuid = $1 order by created_at desc limit $2 offset $3`,
+    [user_uuid as any, limit, offset]
+  );
+  if (res.rowCount === 0) {
+    return undefined;
+  }
+
+  return getSongTasksFromSqlResult(res);
+}
+
+export async function getUserCreatedSongs(
+  user_uuid: string,
+  page: number,
+  limit: number
+): Promise<Song[] | undefined> {
+  try {
+    if (page <= 0) {
+      page = 1;
+    }
+    if (limit <= 0) {
+      limit = 50;
+    }
+    const offset = (page - 1) * limit;
+
+    const db = getDb();
+    const res = await db.query(
+      `SELECT * FROM song_tasks WHERE user_uuid = $1 order by created_at desc limit $2 offset $3`,
+      [user_uuid as any, limit, offset]
+    );
+    if (res.rowCount === 0) {
+      return undefined;
+    }
+
+    let song_uuids: string[] = [];
+    res.rows.forEach((item) => {
+      if (item["song_uuids"]) {
+        const uuids = JSON.parse(item["song_uuids"]);
+        song_uuids.push(...uuids);
+      }
+    });
+
+    console.log("song_uuids", song_uuids);
+
+    const placeholders = song_uuids
+      .map((_, index) => `$${index + 1}`)
+      .join(", ");
+    const song_res = await db.query(
+      `SELECT * FROM songs WHERE uuid IN (${placeholders}) AND status not in ('forbidden','deleted') order by created_at desc`,
+      song_uuids
+    );
+
+    return getSongsFromSqlResult(song_res);
+  } catch (e) {
+    console.log("get user created songs failed:", e);
+    return [];
+  }
+}
+
+export function getSongTasksFromSqlResult(
+  res: QueryResult<QueryResultRow>
+): SongTask[] {
+  if (!res.rowCount || res.rowCount === 0) {
+    return [];
+  }
+
+  const tasks: SongTask[] = [];
+  const { rows } = res;
+  rows.forEach((row) => {
+    const task = formatSongTask(row);
+    if (task) {
+      tasks.push(task);
+    }
+  });
+
+  return tasks;
 }
 
 export function formatSongTask(row: QueryResultRow): SongTask {

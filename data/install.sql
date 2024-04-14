@@ -78,4 +78,19 @@ CREATE TABLE song_tasks (
     song_provider VARCHAR(50),
     song_model VARCHAR(50),
     song_uuids TEXT
-)
+);
+
+CREATE TABLE orders (
+    order_no VARCHAR(255) UNIQUE NOT NULL,
+    created_at timestamptz,
+    user_uuid VARCHAR(255) NOT NULL,
+    user_email VARCHAR(255) NOT NULL,
+    amount INT NOT NULL,
+    plan VARCHAR(50),
+    expired_at timestamptz,
+    order_status SMALLINT NOT NULL,
+    paied_at timestamptz,
+    stripe_session_id VARCHAR(255),
+    credits INT NOT NULL,
+    currency VARCHAR(50)
+);

@@ -123,6 +123,7 @@ export const authOptions: AuthOptions = {
         token.user = {
           uuid: dbUser.uuid,
           nickname: dbUser.nickname,
+          email: dbUser.email,
           avatar_url: dbUser.avatar_url,
           created_at: dbUser.created_at,
         };

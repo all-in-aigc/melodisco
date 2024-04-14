@@ -36,7 +36,8 @@
     "favorites": "Favoris",
     "recently": "Récemment écoutés",
     "tools": "Outils",
-    "create": "Créer de la musique"
+    "create": "Créer de la musique",
+    "creations": "Créations"
   },
   "song": {
     "title": "Titre",
@@ -44,5 +45,10 @@
     "duration": "Durée",
     "lyrics": "Paroles",
     "play": "Lire"
+  },
+  "pricing": {
+    "title": "Tarification",
+    "tip": "Choisissez un plan pour acheter des crédits, Libérez votre créativité avec la musique IA.",
+    "credits": "Crédits"
   }
 }

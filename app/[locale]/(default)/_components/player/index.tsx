@@ -366,7 +366,7 @@ export default function () {
   }, [currentSong]);
 
   useEffect(() => {
-    if (!song) {
+    if (!song || !song.audio_url) {
       return;
     }
 
@@ -460,7 +460,7 @@ export default function () {
                   src={song.image_url}
                   width={48}
                   height={48}
-                  alt={song.title}
+                  alt={song.title || ""}
                   className="rounded-md"
                 />
               )}

@@ -170,3 +170,106 @@ export function formatSong(
 
   return song;
 }
+
+export const styles = [
+  {
+    label: "rock",
+    value: "rock",
+  },
+  {
+    label: "electronic",
+    value: "electronic",
+  },
+  {
+    label: "pop",
+    value: "pop",
+  },
+  {
+    label: "jazz",
+    value: "jazz",
+  },
+  {
+    label: "classical",
+    value: "classical",
+  },
+  {
+    label: "hip hop",
+    value: "hip hop",
+  },
+  {
+    label: "pop rock",
+    value: "pop rock",
+  },
+  {
+    label: "indie rock",
+    value: "indie rock",
+  },
+  {
+    label: "alternative rock",
+    value: "alternative rock",
+  },
+  {
+    label: "folk",
+    value: "folk",
+  },
+  {
+    label: "punk",
+    value: "punk",
+  },
+  {
+    label: "blues",
+    value: "blues",
+  },
+  {
+    label: "experimental",
+    value: "experimental",
+  },
+  {
+    label: "ambient",
+    value: "ambient",
+  },
+  {
+    label: "synth-pop",
+    value: "synth-pop",
+  },
+  {
+    label: "hard rock",
+    value: "hard rock",
+  },
+  {
+    label: "downtempo",
+    value: "downtempo",
+  },
+  {
+    label: "heavy metal",
+    value: "heavy metal",
+  },
+  {
+    label: "house",
+    value: "house",
+  },
+  {
+    label: "electro",
+    value: "electro",
+  },
+  {
+    label: "soul",
+    value: "soul",
+  },
+  {
+    label: "country",
+    value: "country",
+  },
+  {
+    label: "folk rock",
+    value: "folk rock",
+  },
+  {
+    label: "melodic",
+    value: "melodic",
+  },
+  {
+    label: "latin",
+    value: "latin",
+  },
+];

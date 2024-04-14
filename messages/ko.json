@@ -36,7 +36,8 @@
     "favorites": "즐겨찾기",
     "recently": "최근 재생",
     "tools": "도구",
-    "create": "음악 만들기"
+    "create": "음악 만들기",
+    "creations": "창작물"
   },
   "song": {
     "title": "제목",
@@ -44,5 +45,10 @@
     "duration": "재생 시간",
     "lyrics": "가사",
     "play": "재생"
+  },
+  "pricing": {
+    "title": "가격",
+    "tip": "크레딧을 구매할 플랜을 선택하고 AI 음악으로 창의력을 발휘하세요.",
+    "credits": "크레딧"
   }
 }

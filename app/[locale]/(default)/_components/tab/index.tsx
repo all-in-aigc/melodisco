@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function ({ type }: { type: string }) {
@@ -7,15 +8,15 @@ export default function ({ type }: { type: string }) {
 
   return (
     <div role="tablist" className="tabs tabs-sm md:tabs-md tabs-boxed mt-2">
-      <a
+      <Link
         href={`/${type}`}
         className={`tab ${
           pathname.endsWith(type) ? "bg-primary text-base-content" : ""
         }`}
       >
         All
-      </a>
-      <a
+      </Link>
+      <Link
         href={`/${type}/suno-ai-songs`}
         className={`tab ${
           pathname.endsWith("suno-ai-songs")
@@ -24,8 +25,8 @@ export default function ({ type }: { type: string }) {
         }`}
       >
         Suno AI Songs
-      </a>
-      <a
+      </Link>
+      <Link
         href={`/${type}/udio-ai-songs`}
         className={`tab ${
           pathname.endsWith("udio-ai-songs")
@@ -34,7 +35,7 @@ export default function ({ type }: { type: string }) {
         }`}
       >
         Udio AI Songs
-      </a>
+      </Link>
     </div>
   );
 }

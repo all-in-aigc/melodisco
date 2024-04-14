@@ -29,3 +29,15 @@ export async function getUserUuid() {
 
   return user_uuid;
 }
+
+export async function getUserEmail() {
+  let user_email = "";
+
+  const session = await getServerSession(authOptions);
+  console.log("session", session);
+  if (session && session.user && session.user.email) {
+    user_email = session.user.email;
+  }
+
+  return user_email;
+}
