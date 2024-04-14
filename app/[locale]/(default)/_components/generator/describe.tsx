@@ -188,8 +188,8 @@ export default function () {
     } catch (e) {
       setLoading(false);
 
-      console.log("gen lyrics failed:", e);
-      toast.error("generate lyrics failed");
+      console.log("gen song failed:", e);
+      toast.error("generate song failed");
     }
   };
 

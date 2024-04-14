@@ -4,6 +4,7 @@ import { respData, respErr } from "@/utils/resp";
 
 import { Order } from "@/types/order";
 import Stripe from "stripe";
+import { findUserByUuid } from "@/models/user";
 import { genOrderNo } from "@/utils/order";
 
 export const maxDuration = 120;
@@ -20,10 +21,19 @@ export async function POST(req: Request) {
     }
 
     const user_uuid = await getUserUuid();
-    const user_email = await getUserEmail();
-    console.log("user", user_email, user_uuid);
-    if (!user_uuid || !user_email) {
+    if (!user_uuid) {
       return respErr("no auth");
+    }
+
+    let user_email = await getUserEmail();
+    if (!user_email) {
+      const user = await findUserByUuid(user_uuid);
+      if (user) {
+        user_email = user.email;
+      }
+    }
+    if (!user_email) {
+      return respErr("invalid user");
     }
 
     const order_no = genOrderNo();
