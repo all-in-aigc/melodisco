@@ -51,12 +51,12 @@ export default function () {
       icon: <MdOutlineRadio className="text-lg" />,
       active: pathname.endsWith("roaming"),
     },
-    {
-      title: t("playlists"),
-      url: "/playlists",
-      icon: <PiPlaylistDuotone className="text-lg" />,
-      active: pathname.endsWith("playlists"),
-    },
+    // {
+    //   title: t("playlists"),
+    //   url: "/playlists",
+    //   icon: <PiPlaylistDuotone className="text-lg" />,
+    //   active: pathname.endsWith("playlists"),
+    // },
   ];
 
   const libraryNavs: Nav[] = [

@@ -81,3 +81,6 @@ Content-Type: application/json
 {
    "song_uuid": "f81be5c0-3de9-4940-95e1-cfb780d3aa5e"
 }
+
+### 
+POST {{baseUri}}/get-top-songs

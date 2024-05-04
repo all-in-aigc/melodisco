@@ -13,7 +13,7 @@ export interface Song {
   title?: string;
   play_count?: number;
   upvote_count?: number;
-  created_at: string;
+  created_at?: string;
   status: string;
   is_public?: boolean;
   is_trending?: boolean;

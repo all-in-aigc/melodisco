@@ -57,7 +57,9 @@ export async function genSongWithSunoApi(
   tags?: string
 ) {
   try {
-    const callbackUrl = `${process.env.SUNOAPI_CALLBACK_BASE_URL}/api/gen-song-callback?taskid=${task_uuid}`;
+    const callbackUrl = `${process.env.SUNOAPI_CALLBACK_BASE_URL}/api/gen-song-callback/${task_uuid}`;
+    console.log("gen song callback url", callbackUrl);
+
     const uri = `${process.env.SUNOAPI_BASE_URL}/api/v1/generate`;
     let params = null;
     if (lyrics) {
