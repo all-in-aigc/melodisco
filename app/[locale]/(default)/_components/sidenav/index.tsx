@@ -72,12 +72,12 @@ export default function () {
       icon: <MdOutlinePlayCircleOutline className="text-lg" />,
       active: pathname.endsWith("recently"),
     },
-    {
-      title: t("creations"),
-      url: "/creations",
-      icon: <MdOutlineWorkspacePremium className="text-lg" />,
-      active: pathname.endsWith("creations"),
-    },
+    // {
+    //   title: t("creations"),
+    //   url: "/creations",
+    //   icon: <MdOutlineWorkspacePremium className="text-lg" />,
+    //   active: pathname.endsWith("creations"),
+    // },
   ];
 
   const toolsNavs: Nav[] = [
@@ -148,12 +148,12 @@ export default function () {
           <div className="space-y-1 w-40">{Navs(libraryNavs)}</div>
         </div>
 
-        <div className="px-3 py-2">
+        {/* <div className="px-3 py-2">
           <p className="mb-2 px-4 text-sm font-semibold tracking-tight">
             {t("tools")}
           </p>
           <div className="space-y-1 w-40">{Navs(toolsNavs)}</div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

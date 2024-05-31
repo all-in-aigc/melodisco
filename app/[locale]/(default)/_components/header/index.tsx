@@ -90,7 +90,14 @@ export default function () {
       </div>
 
       <div className="hidden md:block">
-        <Link href={"/pricing"}>{t("title")}</Link>
+        {/* <Link href={"/pricing"}>{t("title")}</Link> */}
+        <a
+          href="https://heybeauty.ai"
+          target="_blank"
+          className="text-primary pl-8"
+        >
+          HeyBeauty AI Try-On
+        </a>
       </div>
 
       <div className="hidden md:block md:ml-8">{/* <Producthunt /> */}</div>

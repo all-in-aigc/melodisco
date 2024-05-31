@@ -15,7 +15,7 @@ export default function () {
   return (
     <div className="mx-auto flex flex-row items-center justify-center">
       <a
-        href="https://twitter.com/idoubicc"
+        href="https://twitter.com/trysdotai"
         target="_blank"
         rel="nofollow"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
@@ -72,7 +72,7 @@ export default function () {
         <SiBuymeacoffee className="text-lg" />
       </a>
       <a
-        href="mailto:support@thinkany.ai"
+        href="mailto:support@trys.ai"
         target="_blank"
         rel="nofollow"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
