@@ -108,11 +108,12 @@ open `http://localhost:8023` for preview
 
 - [aiwallpaper](https://aiwallpaper.shop) for code reference
 - [nextjs](https://nextjs.org/docs) for full-stack development
+- [tailwindcss](https://tailwindcss.com/) for page building
+- [shadcn/ui](https://ui.shadcn.com/docs/installation/next) for ui component
 - [next-auth](https://next-auth.js.org/getting-started/example) for auth
 - [next-intl](https://next-intl-docs.vercel.app/docs/getting-started) for multiple languages
 - [stripe](https://stripe.com/docs/development) for payment
 - [node-postgres](https://node-postgres.com/) for data processing
-- [tailwindcss](https://tailwindcss.com/) for page building
 
 ## Also see
 
