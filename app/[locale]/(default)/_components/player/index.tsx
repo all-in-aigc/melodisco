@@ -473,7 +473,7 @@ export default function () {
                     className={`badge ml-1 ${
                       song.provider === "udio"
                         ? "bg-red-500 text-white"
-                        : "bg-primary"
+                        : "bg-primary text-white"
                     }`}
                   >
                     {song.provider}
@@ -497,10 +497,10 @@ export default function () {
 
               <button
                 onClick={togglePlay}
-                className="p-1 bg-primary rounded-full text-neutral"
+                className="p-1 bg-primary rounded-full text-white"
               >
                 {isPlaying ? (
-                  <MdOutlinePause className="text-3xl" />
+                  <MdOutlinePause className="text-3xl " />
                 ) : (
                   <MdOutlinePlayArrow className="text-3xl" />
                 )}

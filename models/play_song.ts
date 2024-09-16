@@ -1,20 +1,18 @@
 import { PlaySong, Song } from "@/types/song";
 
-import { getDb } from "./db";
 import { getSongsFromSqlResult } from "./song";
+import { getSupabaseClient } from "./db";
 
 export async function insertPlaySong(song: PlaySong) {
-  const db = getDb();
-  const res = await db.query(
-    `INSERT INTO play_songs 
-      (song_uuid, user_uuid, created_at) 
-      VALUES 
-      ($1, $2, $3)
-  `,
-    [song.song_uuid, song.user_uuid, song.created_at]
-  );
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase.from("play_songs").insert({
+    song_uuid: song.song_uuid,
+    user_uuid: song.user_uuid,
+    created_at: song.created_at,
+  });
 
-  return res;
+  if (error) throw error;
+  return data;
 }
 
 export async function getUserPlaySongs(
@@ -30,23 +28,14 @@ export async function getUserPlaySongs(
   }
   const offset = (page - 1) * limit;
 
-  const db = getDb();
-  const res = await db.query(
-    `SELECT s.*, p.song_uuid, p.created_at
-    FROM (
-      SELECT song_uuid, MAX(created_at) as MaxCreatedAt
-      FROM play_songs WHERE user_uuid = $1 
-      GROUP BY song_uuid
-    ) AS latest
-    JOIN play_songs p ON latest.song_uuid = p.song_uuid AND latest.MaxCreatedAt = p.created_at
-    JOIN songs s ON p.song_uuid = s.uuid
-    ORDER BY p.created_at DESC LIMIT $2 OFFSET $3;`,
-    [user_uuid as any, limit, offset]
-  );
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase.rpc("get_user_play_songs", {
+    user_uuid,
+    results_limit: limit,
+    results_offset: offset,
+  });
 
-  if (res.rowCount === 0) {
-    return undefined;
-  }
+  if (error) return undefined;
 
-  return getSongsFromSqlResult(res);
+  return getSongsFromSqlResult({ rows: data });
 }

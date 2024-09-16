@@ -87,14 +87,14 @@ export default function () {
       >
         <MdOutlineMail className="text-xl" />
       </a> */}
-      <a
+      {/* <a
         href="https://thinkany.ai"
         target="_blank"
         rel="nofollow"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
       >
         <FaSearch className="text-md" />
-      </a>
+      </a> */}
     </div>
   );
 }

@@ -6,6 +6,8 @@ import Tab from "../_components/tab";
 import { getTranslations } from "next-intl/server";
 import { getTrendingSongs } from "@/models/song";
 
+export const runtime = "edge";
+
 export const maxDuration = 120;
 
 export async function generateMetadata({

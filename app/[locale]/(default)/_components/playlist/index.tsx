@@ -132,7 +132,7 @@ export default function ({
                         className={`badge mt-1 ${
                           song.provider === "udio"
                             ? "bg-red-500 text-white"
-                            : "bg-primary"
+                            : "bg-primary text-white"
                         }`}
                       >
                         {song.provider || "suno"}

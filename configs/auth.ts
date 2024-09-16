@@ -1,9 +1,8 @@
 import { genUniSeq, getIsoTimestr } from "@/utils";
 
-import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { OAuth2Client } from "google-auth-library";
+import { NextAuthConfig } from "next-auth";
 import { Provider } from "next-auth/providers/index";
 import { User } from "@/types/user";
 import { saveUser } from "@/services/user";
@@ -26,13 +25,15 @@ let providers: Provider[] = [
 
       const token = credentials!.credential;
 
-      const client = new OAuth2Client(googleClientId);
-      const ticket = await client.verifyIdToken({
-        idToken: token,
-        audience: googleClientId,
-      });
+      const response = await fetch(
+        "https://oauth2.googleapis.com/tokeninfo?id_token=" + token
+      );
+      if (!response.ok) {
+        console.log("Failed to verify token");
+        return null;
+      }
 
-      const payload = ticket.getPayload();
+      const payload = await response.json();
       if (!payload) {
         console.log("invalid payload from token");
         return null;
@@ -76,7 +77,7 @@ if (
   );
 }
 
-export const authOptions: AuthOptions = {
+export const authOptions: NextAuthConfig = {
   providers,
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {

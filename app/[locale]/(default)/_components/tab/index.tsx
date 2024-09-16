@@ -11,7 +11,7 @@ export default function ({ type }: { type: string }) {
       <Link
         href={`/${type}`}
         className={`tab ${
-          pathname.endsWith(type) ? "bg-primary text-base-content" : ""
+          pathname.endsWith(type) ? "bg-primary text-white" : ""
         }`}
       >
         All
@@ -19,9 +19,7 @@ export default function ({ type }: { type: string }) {
       <Link
         href={`/${type}/suno-ai-songs`}
         className={`tab ${
-          pathname.endsWith("suno-ai-songs")
-            ? "bg-primary text-base-content"
-            : ""
+          pathname.endsWith("suno-ai-songs") ? "bg-primary text-white" : ""
         }`}
       >
         Suno AI Songs
@@ -29,9 +27,7 @@ export default function ({ type }: { type: string }) {
       <Link
         href={`/${type}/udio-ai-songs`}
         className={`tab ${
-          pathname.endsWith("udio-ai-songs")
-            ? "bg-primary text-base-content"
-            : ""
+          pathname.endsWith("udio-ai-songs") ? "bg-primary text-white" : ""
         }`}
       >
         Udio AI Songs

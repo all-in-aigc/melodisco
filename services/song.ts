@@ -2,31 +2,10 @@ import { getLatestSongs, getTrendingSongs } from "./suno";
 import { getUuids, insertRow } from "@/models/song";
 
 import { Song } from "@/types/song";
-import fs from "fs";
 
 export const getSongsFromFile = async (): Promise<Song[]> => {
-  try {
-    const dataFile = process.env.SUNO_SONGS_FILE;
-    if (!dataFile) {
-      return [];
-    }
-
-    const data = fs.readFileSync(dataFile, "utf8");
-    const jsonData = JSON.parse(data);
-
-    let songs: Song[] = [];
-    jsonData.map((v: any) => {
-      const song = formatSong(v, false);
-      if (song) {
-        songs.push(song);
-      }
-    });
-
-    return songs;
-  } catch (err) {
-    console.error("load songs file failed:", err);
-    return [];
-  }
+  // This function is removed as it uses 'fs' which is not available in edge runtime
+  return [];
 };
 
 export async function getSunoTrendingSongs(page: number): Promise<Song[]> {

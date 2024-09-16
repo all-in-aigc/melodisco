@@ -1,16 +1,10 @@
-import { Pool } from "pg";
+import { createClient } from "@supabase/supabase-js";
 
-let globalPool: Pool;
+export function getSupabaseClient() {
+  const client = createClient(
+    process.env.SUPABASE_URL || "",
+    process.env.SUPABASE_ANON_KEY || ""
+  );
 
-export function getDb() {
-  if (!globalPool) {
-    const connectionString = process.env.POSTGRES_URL;
-    console.log("connectionString", connectionString);
-
-    globalPool = new Pool({
-      connectionString,
-    });
-  }
-
-  return globalPool;
+  return client;
 }

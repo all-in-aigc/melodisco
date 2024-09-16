@@ -9,6 +9,8 @@ import { FavoriteSong } from "@/types/song";
 import { getIsoTimestr } from "@/utils";
 import { getUserUuid } from "@/services/user";
 
+export const runtime = "edge";
+
 export const maxDuration = 120;
 
 export async function POST(req: Request) {

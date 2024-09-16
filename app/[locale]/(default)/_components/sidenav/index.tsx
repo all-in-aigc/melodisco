@@ -115,10 +115,10 @@ export default function () {
               <Button
                 key={idx}
                 variant="ghost"
-                className={`md:w-full hover:bg-base-100 justify-start gap-x-1 ${
+                className={`md:w-full hover:bg-base-100 justify-start gap-x-1 my-1 truncate ${
                   nav.active
-                    ? "text-primary hover:text-primary"
-                    : "hover:text-base-content"
+                    ? "bg-primary text-white hover:bg-primary hover:text-white"
+                    : "hover:bg-base-200 hover:text-base-content"
                 }`}
               >
                 {nav.icon}

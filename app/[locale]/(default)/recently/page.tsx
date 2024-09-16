@@ -10,6 +10,8 @@ import { signIn } from "next-auth/react";
 import { useAppContext } from "@/contexts/app";
 import { useTranslations } from "next-intl";
 
+export const runtime = "edge";
+
 export const maxDuration = 120;
 
 export default function () {

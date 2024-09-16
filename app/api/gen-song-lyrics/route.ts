@@ -7,6 +7,8 @@ import { getTimestamp } from "@/utils/time";
 import { getUserUuid } from "@/services/user";
 import { insertSongTask } from "@/models/task";
 
+export const runtime = "edge";
+
 export async function POST(req: Request) {
   try {
     const { description } = await req.json();

@@ -5,6 +5,8 @@ import { formatSong } from "@/services/song";
 import { getSongInfo } from "@/services/udio";
 import { redirect } from "next/navigation";
 
+export const runtime = "edge";
+
 export const maxDuration = 120;
 
 export default async function ({ params }: { params: { uuid: string } }) {

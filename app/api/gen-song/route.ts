@@ -8,6 +8,8 @@ import { genSong } from "@/services/suno";
 import { getUserUuid } from "@/services/user";
 import { insertRow } from "@/models/song";
 
+export const runtime = "edge";
+
 export async function POST(req: Request) {
   try {
     const { description, title, lyrics, tags, is_no_lyrics, mode } =

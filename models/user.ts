@@ -1,64 +1,57 @@
-import { QueryResultRow } from "pg";
 import { User } from "@/types/user";
-import { getDb } from "@/models/db";
+import { getSupabaseClient } from "./db";
 
 export async function insertUser(user: User) {
-  const db = await getDb();
-  const res = await db.query(
-    `INSERT INTO users 
-      (uuid, email, created_at, nickname, avatar_url, locale, signin_type, signin_ip, signin_provider, signin_openid) 
-      VALUES 
-      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-  `,
-    [
-      user.uuid,
-      user.email,
-      user.created_at || "",
-      user.nickname,
-      user.avatar_url,
-      user.locale || "",
-      user.signin_type || "",
-      user.signin_ip || "",
-      user.signin_provider || "",
-      user.signin_openid || "",
-    ]
-  );
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("users")
+    .insert([
+      {
+        uuid: user.uuid,
+        email: user.email,
+        created_at: user.created_at || new Date().toISOString(),
+        nickname: user.nickname,
+        avatar_url: user.avatar_url,
+        locale: user.locale || "",
+        signin_type: user.signin_type || "",
+        signin_ip: user.signin_ip || "",
+        signin_provider: user.signin_provider || "",
+        signin_openid: user.signin_openid || "",
+      },
+    ])
+    .select();
 
-  return res;
+  if (error) throw error;
+  return data;
 }
 
 export async function findUserByEmail(
   email: string
 ): Promise<User | undefined> {
-  const db = getDb();
-  const res = await db.query(`SELECT * FROM users WHERE email = $1 LIMIT 1`, [
-    email,
-  ]);
-  if (res.rowCount === 0) {
-    return undefined;
-  }
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", email)
+    .single();
 
-  const { rows } = res;
-
-  return formatUser(rows[0]);
+  if (error) return undefined;
+  return formatUser(data);
 }
 
 export async function findUserByUuid(uuid: string): Promise<User | undefined> {
-  const db = getDb();
-  const res = await db.query(
-    `SELECT * FROM users WHERE uuid::VARCHAR = $1 LIMIT 1`,
-    [uuid]
-  );
-  if (res.rowCount === 0) {
-    return undefined;
-  }
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("uuid", uuid)
+    .single();
 
-  const { rows } = res;
-
-  return formatUser(rows[0]);
+  if (error) return undefined;
+  return formatUser(data);
 }
 
-export function formatUser(row: QueryResultRow): User {
+export function formatUser(row: any): User {
   const user: User = {
     uuid: row.uuid,
     email: row.email,

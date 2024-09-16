@@ -1,107 +1,91 @@
-import { QueryResult, QueryResultRow } from "pg";
-
 import { Song } from "@/types/song";
 import { SongTask } from "@/types/task";
-import { getDb } from "@/models/db";
 import { getSongsFromSqlResult } from "./song";
+import { getSupabaseClient } from "./db";
 
 export async function insertSongTask(task: SongTask) {
-  const db = await getDb();
-  const res = await db.query(
-    `INSERT INTO song_tasks 
-      (uuid, user_uuid, created_at, updated_at, status, description, title, lyrics, tags, is_no_lyrics, lyrics_provider, lyrics_uuid, song_provider, song_model, song_uuids) 
-      VALUES 
-      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
-  `,
-    [
-      task.uuid,
-      task.user_uuid,
-      task.created_at,
-      task.updated_at,
-      task.status,
-      task.description,
-      task.title as any,
-      task.lyrics,
-      task.tags,
-      task.is_no_lyrics,
-      task.lyrics_provider,
-      task.lyrics_uuid,
-      task.song_provider,
-      task.song_model,
-      task.song_uuids,
-    ]
-  );
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("song_tasks")
+    .insert([
+      {
+        uuid: task.uuid,
+        user_uuid: task.user_uuid,
+        created_at: task.created_at,
+        updated_at: task.updated_at,
+        status: task.status,
+        description: task.description,
+        title: task.title,
+        lyrics: task.lyrics,
+        tags: task.tags,
+        is_no_lyrics: task.is_no_lyrics,
+        lyrics_provider: task.lyrics_provider,
+        lyrics_uuid: task.lyrics_uuid,
+        song_provider: task.song_provider,
+        song_model: task.song_model,
+        song_uuids: task.song_uuids,
+      },
+    ])
+    .select();
 
-  return res;
+  return { data, error };
 }
 
 export async function getUserSongTasksCount(
   user_uuid: string
 ): Promise<number> {
-  const db = getDb();
-  const res = await db.query(
-    `SELECT count(1) as count FROM song_tasks WHERE user_uuid = $1`,
-    [user_uuid]
-  );
-  if (res.rowCount === 0) {
+  const supabase = getSupabaseClient();
+  const { count, error } = await supabase
+    .from("song_tasks")
+    .select("*", { count: "exact", head: true })
+    .eq("user_uuid", user_uuid);
+
+  if (error) {
+    console.error("Error getting song tasks count:", error);
     return 0;
   }
 
-  const { rows } = res;
-  const row = rows[0];
-
-  return row.count;
+  return count || 0;
 }
 
 export async function updateSongTask(task: SongTask) {
-  const db = await getDb();
-  const res = await db.query(
-    `UPDATE song_tasks SET 
-      updated_at=$1,
-      description=$2,
-      title=$3,
-      lyrics=$4,
-      tags=$5,
-      is_no_lyrics=$6,
-      song_provider=$7,
-      song_model=$8,
-      song_uuids=$9,
-      status=$10
-    WHERE uuid=$11
-  `,
-    [
-      task.updated_at,
-      task.description,
-      task.title as any,
-      task.lyrics,
-      task.tags,
-      task.is_no_lyrics,
-      task.song_provider,
-      task.song_model,
-      task.song_uuids,
-      task.status,
-      task.uuid,
-    ]
-  );
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("song_tasks")
+    .update({
+      updated_at: task.updated_at,
+      description: task.description,
+      title: task.title,
+      lyrics: task.lyrics,
+      tags: task.tags,
+      is_no_lyrics: task.is_no_lyrics,
+      song_provider: task.song_provider,
+      song_model: task.song_model,
+      song_uuids: task.song_uuids,
+      status: task.status,
+    })
+    .eq("uuid", task.uuid)
+    .select();
 
-  return res;
+  return { data, error };
 }
 
 export async function findSongTaskByUuid(
   uuid: string
 ): Promise<SongTask | undefined> {
-  const db = getDb();
-  const res = await db.query(
-    `SELECT * FROM song_tasks WHERE uuid = $1 LIMIT 1`,
-    [uuid]
-  );
-  if (res.rowCount === 0) {
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("song_tasks")
+    .select("*")
+    .eq("uuid", uuid)
+    .single();
+
+  if (error) {
+    console.error("Error finding song task:", error);
     return undefined;
   }
 
-  const { rows } = res;
-
-  return formatSongTask(rows[0]);
+  return formatSongTask(data);
 }
 
 export async function getUserSongTasks(
@@ -109,6 +93,7 @@ export async function getUserSongTasks(
   page: number,
   limit: number
 ): Promise<SongTask[] | undefined> {
+  const supabase = getSupabaseClient();
   if (page <= 0) {
     page = 1;
   }
@@ -117,16 +102,21 @@ export async function getUserSongTasks(
   }
   const offset = (page - 1) * limit;
 
-  const db = getDb();
-  const res = await db.query(
-    `SELECT * FROM song_tasks WHERE user_uuid = $1 order by created_at desc limit $2 offset $3`,
-    [user_uuid as any, limit, offset]
-  );
-  if (res.rowCount === 0) {
+  const { data, error } = await supabase
+    .from("song_tasks")
+    .select("*")
+    .eq("user_uuid", user_uuid)
+    .order("created_at", { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) {
+    console.error("Error getting user song tasks:", error);
     return undefined;
   }
 
-  return getSongTasksFromSqlResult(res);
+  return data
+    ? getSongTasksFromSqlResult({ rows: data, rowCount: data.length })
+    : undefined;
 }
 
 export async function getUserCreatedSongs(
@@ -134,6 +124,7 @@ export async function getUserCreatedSongs(
   page: number,
   limit: number
 ): Promise<Song[] | undefined> {
+  const supabase = getSupabaseClient();
   try {
     if (page <= 0) {
       page = 1;
@@ -143,50 +134,55 @@ export async function getUserCreatedSongs(
     }
     const offset = (page - 1) * limit;
 
-    const db = getDb();
-    const res = await db.query(
-      `SELECT * FROM song_tasks WHERE user_uuid = $1 order by created_at desc limit $2 offset $3`,
-      [user_uuid as any, limit, offset]
-    );
-    if (res.rowCount === 0) {
+    const { data: taskData, error: taskError } = await supabase
+      .from("song_tasks")
+      .select("song_uuids")
+      .eq("user_uuid", user_uuid)
+      .order("created_at", { ascending: false })
+      .range(offset, offset + limit - 1);
+
+    if (taskError) {
+      console.error("Error getting user song tasks:", taskError);
       return undefined;
     }
 
     let song_uuids: string[] = [];
-    res.rows.forEach((item) => {
-      if (item["song_uuids"]) {
-        const uuids = JSON.parse(item["song_uuids"]);
+    taskData.forEach((item) => {
+      if (item.song_uuids) {
+        const uuids = JSON.parse(item.song_uuids);
         song_uuids.push(...uuids);
       }
     });
 
     console.log("song_uuids", song_uuids);
 
-    const placeholders = song_uuids
-      .map((_, index) => `$${index + 1}`)
-      .join(", ");
-    const song_res = await db.query(
-      `SELECT * FROM songs WHERE uuid IN (${placeholders}) AND status not in ('forbidden','deleted') order by created_at desc`,
-      song_uuids
-    );
+    const { data: songData, error: songError } = await supabase
+      .from("songs")
+      .select("*")
+      .in("uuid", song_uuids)
+      .not("status", "in", '("forbidden","deleted")')
+      .order("created_at", { ascending: false });
 
-    return getSongsFromSqlResult(song_res);
+    if (songError) {
+      console.error("Error getting songs:", songError);
+      return undefined;
+    }
+
+    return getSongsFromSqlResult({ rows: songData, rowCount: songData.length });
   } catch (e) {
     console.log("get user created songs failed:", e);
     return [];
   }
 }
 
-export function getSongTasksFromSqlResult(
-  res: QueryResult<QueryResultRow>
-): SongTask[] {
+export function getSongTasksFromSqlResult(res: any): SongTask[] {
   if (!res.rowCount || res.rowCount === 0) {
     return [];
   }
 
   const tasks: SongTask[] = [];
   const { rows } = res;
-  rows.forEach((row) => {
+  rows.forEach((row: any) => {
     const task = formatSongTask(row);
     if (task) {
       tasks.push(task);
@@ -196,7 +192,7 @@ export function getSongTasksFromSqlResult(
   return tasks;
 }
 
-export function formatSongTask(row: QueryResultRow): SongTask {
+export function formatSongTask(row: any): SongTask {
   const task: SongTask = {
     uuid: row.uuid,
     user_uuid: row.user_uuid,

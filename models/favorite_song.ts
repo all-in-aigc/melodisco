@@ -1,56 +1,52 @@
 import { FavoriteSong, Song } from "@/types/song";
 
-import { QueryResultRow } from "pg";
-import { getDb } from "./db";
 import { getSongsFromSqlResult } from "./song";
+import { getSupabaseClient } from "./db";
 
 export async function insertFavoriteSong(song: FavoriteSong) {
-  const db = getDb();
-  const res = await db.query(
-    `INSERT INTO favorite_songs 
-      (song_uuid, user_uuid, created_at, updated_at, status) 
-      VALUES 
-      ($1, $2, $3, $4, $5)
-  `,
-    [
-      song.song_uuid,
-      song.user_uuid,
-      song.created_at,
-      song.updated_at,
-      song.status,
-    ]
-  );
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase.from("favorite_songs").insert({
+    song_uuid: song.song_uuid,
+    user_uuid: song.user_uuid,
+    created_at: song.created_at,
+    updated_at: song.updated_at,
+    status: song.status,
+  });
 
-  return res;
+  if (error) throw error;
+  return data;
 }
 
 export async function updateFavoriteSong(song: FavoriteSong) {
-  const db = getDb();
-  const res = await db.query(
-    `UPDATE favorite_songs SET status = $1, updated_at = $2 WHERE song_uuid = $3 AND user_uuid = $4
-  `,
-    [song.status, song.updated_at, song.song_uuid, song.user_uuid]
-  );
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("favorite_songs")
+    .update({
+      status: song.status,
+      updated_at: song.updated_at,
+    })
+    .eq("song_uuid", song.song_uuid)
+    .eq("user_uuid", song.user_uuid);
 
-  return res;
+  if (error) throw error;
+  return data;
 }
 
 export async function findFavoriteSong(
   song_uuid: string,
   user_uuid: string
 ): Promise<FavoriteSong | undefined> {
-  const db = getDb();
-  const res = await db.query(
-    `SELECT * FROM favorite_songs WHERE song_uuid = $1 AND user_uuid = $2 LIMIT 1`,
-    [song_uuid, user_uuid]
-  );
-  if (res.rowCount === 0) {
-    return undefined;
-  }
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("favorite_songs")
+    .select("*")
+    .eq("song_uuid", song_uuid)
+    .eq("user_uuid", user_uuid)
+    .limit(1)
+    .single();
 
-  const { rows } = res;
-
-  return formatFavoriteSong(rows[0]);
+  if (error) return undefined;
+  return formatFavoriteSong(data);
 }
 
 export async function getUserFavoriteSongs(
@@ -58,6 +54,7 @@ export async function getUserFavoriteSongs(
   page: number,
   limit: number
 ): Promise<Song[] | undefined> {
+  const supabase = getSupabaseClient();
   if (page < 1) {
     page = 1;
   }
@@ -66,25 +63,17 @@ export async function getUserFavoriteSongs(
   }
   const offset = (page - 1) * limit;
 
-  const db = getDb();
-  const res = await db.query(
-    `SELECT s.*, fs.updated_at FROM songs AS s 
-      LEFT JOIN favorite_songs AS fs 
-      ON s.uuid = fs.song_uuid 
-      WHERE fs.user_uuid = $1 AND fs.status = 'on' 
-      ORDER BY fs.updated_at DESC 
-      LIMIT $2 OFFSET $3`,
-    [user_uuid as any, limit, offset]
-  );
+  const { data, error } = await supabase.rpc("get_user_favorite_songs", {
+    user_uuid,
+    results_limit: limit,
+    results_offset: offset,
+  });
 
-  if (res.rowCount === 0) {
-    return undefined;
-  }
-
-  return getSongsFromSqlResult(res);
+  if (error) return undefined;
+  return getSongsFromSqlResult({ rows: data });
 }
 
-export function formatFavoriteSong(row: QueryResultRow): FavoriteSong {
+export function formatFavoriteSong(row: any): FavoriteSong {
   const favoriteSong: FavoriteSong = {
     song_uuid: row.song_uuid,
     user_uuid: row.user_uuid,

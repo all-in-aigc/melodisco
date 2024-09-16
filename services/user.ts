@@ -1,8 +1,7 @@
 import { findUserByEmail, insertUser } from "@/models/user";
 
 import { User } from "@/types/user";
-import { authOptions } from "@/configs/auth";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 
 export async function saveUser(user: User) {
   try {
@@ -22,7 +21,7 @@ export async function saveUser(user: User) {
 export async function getUserUuid() {
   let user_uuid = "";
 
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (session && session.user && session.user.uuid) {
     user_uuid = session.user.uuid;
   }
@@ -33,7 +32,7 @@ export async function getUserUuid() {
 export async function getUserEmail() {
   let user_email = "";
 
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   console.log("session", session);
   if (session && session.user && session.user.email) {
     user_email = session.user.email;

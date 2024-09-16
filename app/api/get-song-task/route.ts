@@ -2,6 +2,8 @@ import { respData, respErr } from "@/utils/resp";
 
 import { findSongTaskByUuid } from "@/models/task";
 
+export const runtime = "edge";
+
 export async function POST(req: Request) {
   try {
     const { task_uuid } = await req.json();

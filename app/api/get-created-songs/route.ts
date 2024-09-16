@@ -3,6 +3,8 @@ import { respData, respErr } from "@/utils/resp";
 import { getUserCreatedSongs } from "@/models/task";
 import { getUserUuid } from "@/services/user";
 
+export const runtime = "edge";
+
 export const maxDuration = 120;
 
 export async function POST(req: Request) {

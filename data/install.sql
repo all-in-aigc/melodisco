@@ -94,3 +94,47 @@ CREATE TABLE orders (
     credits INT NOT NULL,
     currency VARCHAR(50)
 );
+
+CREATE OR REPLACE FUNCTION get_random_songs(provider_param VARCHAR(50), page integer, results_limit integer)
+RETURNS SETOF songs AS $$
+BEGIN
+  RETURN QUERY
+  SELECT *
+  FROM songs s
+  WHERE s.status = 'complete'
+    AND s.audio_url != ''
+    AND (provider_param IS NULL OR s.provider = provider_param)
+  ORDER BY random()
+  LIMIT results_limit OFFSET (page - 1) * results_limit;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_user_play_songs(user_uuid VARCHAR(255), results_limit INTEGER, results_offset INTEGER)
+RETURNS SETOF songs AS $$
+BEGIN
+  RETURN QUERY
+  SELECT s.*
+  FROM (
+    SELECT song_uuid, MAX(created_at) AS MaxCreatedAt
+    FROM play_songs ps
+    WHERE ps.user_uuid = get_user_play_songs.user_uuid 
+    GROUP BY song_uuid
+  ) AS latest
+  JOIN play_songs p ON latest.song_uuid = p.song_uuid AND latest.MaxCreatedAt = p.created_at
+  JOIN songs s ON p.song_uuid = s.uuid
+  ORDER BY p.created_at DESC LIMIT results_limit OFFSET results_offset;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_user_favorite_songs(user_uuid VARCHAR(255), results_limit INTEGER, results_offset INTEGER)
+RETURNS SETOF songs AS $$
+BEGIN
+  RETURN QUERY
+  SELECT s.*
+  FROM songs AS s
+  LEFT JOIN favorite_songs AS fs ON s.uuid = fs.song_uuid
+  WHERE fs.user_uuid = get_user_favorite_songs.user_uuid AND fs.status = 'on'
+  ORDER BY fs.updated_at DESC
+  LIMIT results_limit OFFSET results_offset;
+END;
+$$ LANGUAGE plpgsql;

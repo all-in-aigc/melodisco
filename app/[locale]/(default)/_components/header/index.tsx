@@ -54,7 +54,7 @@ export default function () {
   }, [user]);
 
   return (
-    <header className="flex h-16 left-0 right-0 fixed bg-base-100 z-50 items-center gap-4 border-b border-base-300 px-4 lg:h-[80px] lg:px-6">
+    <header className="flex h-16 left-0 md:left-[236px] right-0 fixed bg-base-100 z-50 items-center border-b border-base-300 gap-4 px-4 lg:h-[80px] lg:px-6">
       <Sheet open={isSiderOpen} onOpenChange={setIsSiderOpen}>
         <SheetTrigger asChild>
           <Button
@@ -80,14 +80,14 @@ export default function () {
         </SheetContent>
       </Sheet>
 
-      <div className="mr-8">
+      {/* <div className="mr-8">
         <Link href="/" className="flex items-center gap-x-2 font-semibold">
           <img src="/logo.png" className="w-16 h-16" />
           <span className="hidden md:block text-2xl font-medium">
             Melodisco
           </span>
         </Link>
-      </div>
+      </div> */}
 
       <div className="hidden md:block">
         {/* <Link href={"/pricing"}>{t("title")}</Link> */}
@@ -115,12 +115,12 @@ export default function () {
         </form> */}
       </div>
 
-      {userCredits && (
+      {/* {userCredits && (
         <Link href={"/pricing"} className="mr-2">
           {t("credits")}:
           <span className="text-primary ml-2">{userCredits.left_credits}</span>
         </Link>
-      )}
+      )} */}
 
       <Theme />
 
